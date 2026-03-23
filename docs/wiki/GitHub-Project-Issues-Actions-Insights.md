@@ -30,7 +30,9 @@ The project is **linked to the repository**, so it appears under **[github.com/s
 
 ## Insights
 
-**[Pulse / Insights](https://github.com/shellworlds/OPNBNK4/pulse)** — populated by GitHub from activity, contributors, and (if enabled) traffic. Enable **Dependency graph** / **Dependabot** under **Settings → Code security** if the client requires it.
+**[Pulse / Insights](https://github.com/shellworlds/OPNBNK4/pulse)** — populated by GitHub from activity, contributors, and (if enabled) traffic.
+
+**Dependency graph & Dependabot:** [`.github/dependabot.yml`](https://github.com/shellworlds/OPNBNK4/blob/main/.github/dependabot.yml) enables **version update PRs** for Gradle, npm, and Actions. See [INSIGHTS_DEPENDABOT.md](https://github.com/shellworlds/OPNBNK4/blob/main/docs/github/INSIGHTS_DEPENDABOT.md) for UI settings (dependency graph, optional alerts).
 
 ## Wiki (this site)
 
