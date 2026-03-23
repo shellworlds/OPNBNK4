@@ -2,6 +2,23 @@
 
 All notable changes to **OPNBNK4** (Digital Banking Platform) are documented here.
 
+## [1.0.1-day6] — 2026-03-23
+
+### Added
+
+- **Operations:** `post-deployment-validation.md`, `alert-validation.md`, `incident-response.md`, `rollback-procedure.md`; runbook post-deploy section + support table.
+- **GitHub:** Issue form **Post-deployment defect**.
+- **Training:** `docs/training/training-slides.md`, `hands-on-session.md`, `faq-training.md`; `deliverables/training/README.md`.
+- **Compliance evidence:** `deliverables/compliance-evidence/` (README, GDPR, PSD2, security scan procedure).
+- **API handover:** `deliverables/postman/OPNBNK4-gateway.postman_collection.json`; `deliverables/swagger-ui/README.md`.
+- **Architecture:** `deliverables/architecture/README.md` (export instructions for PDF/PNG).
+- **Acceptance:** `docs/submission/FINAL_ACCEPTANCE_CHECKLIST.md`, `deliverables/ACCEPTANCE_LETTER.md`.
+- **Docs:** `DAY6_COMPLETE.md`, `CLIENT_HANDOFF_DAY6.md`, `SUBMISSION_DAY6.md`, `docs/github/DAY6_DEDICATED_ISSUES.md`, wiki **Day-6-Delivery**.
+
+### Changed
+
+- **`deliverables/README.md`:** manifest extended; **`.gitignore`:** training video binaries.
+
 ## [1.0.0] — 2026-03-23
 
 ### Added

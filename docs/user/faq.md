@@ -11,3 +11,6 @@ Operator-facing stub: `GET /api/user/export?customerId=...` (protect in producti
 
 **Where is the developer portal?**  
 TPP onboarding UI is partial; use demo headers and Postman patterns from smoke tests until the portal ships.
+
+**Where is client training material?**  
+See `docs/training/training-slides.md`, `hands-on-session.md`, and `faq-training.md`. Video: `deliverables/training/README.md`.

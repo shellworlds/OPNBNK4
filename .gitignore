@@ -44,3 +44,6 @@ Thumbs.db
 # Large client demo assets (keep README only in git)
 deliverables/demo/*.mp4
 deliverables/demo/*.mov
+deliverables/training/*.mp4
+deliverables/training/*.mov
+deliverables/training-video.mp4

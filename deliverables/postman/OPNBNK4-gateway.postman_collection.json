@@ -1,0 +1,44 @@
+{
+  "info": {
+    "name": "OPNBNK4 — API Gateway (staging template)",
+    "description": "Set collection variable `baseUrl` (e.g. https://api.example.com). Add Bearer token when JWT is enforced.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080" },
+    { "key": "clientId", "value": "postman-client" },
+    { "key": "channel", "value": "automation" }
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/actuator/health"
+      }
+    },
+    {
+      "name": "Accounts — list (requires channel headers)",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "X-Client-Id", "value": "{{clientId}}" },
+          { "key": "X-Client-Channel", "value": "{{channel}}" }
+        ],
+        "url": "{{baseUrl}}/api/accounts"
+      }
+    },
+    {
+      "name": "User export (GDPR stub)",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "X-Client-Id", "value": "{{clientId}}" },
+          { "key": "X-Client-Channel", "value": "{{channel}}" }
+        ],
+        "url": "{{baseUrl}}/api/user/export?customerId=open-sample-uk-001"
+      }
+    }
+  ]
+}

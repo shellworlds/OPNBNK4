@@ -20,6 +20,12 @@ UAT documentation, fraud **UNDER_REVIEW** status and PIS status propagation, UI 
 
 ---
 
+### Day 6 documentation (2026-03-23)
+
+Post-deploy validation runbooks, training pack, compliance evidence index, Postman collection, acceptance templates — see [Day 6 — Delivery](Day-6-Delivery). Changelog: **1.0.1-day6** on `main` (documentation milestone; optional tag).
+
+
+
 ## v0.9.0 — Day 4 release candidate
 
 - **Tag / release:** [v0.9.0](https://github.com/shellworlds/OPNBNK4/releases/tag/v0.9.0) *(create on GitHub after merge if not present)*

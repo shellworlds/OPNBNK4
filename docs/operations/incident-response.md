@@ -27,7 +27,7 @@
 
 ## Issues
 
-Use GitHub template **Post-deployment defect**.
+Use the issue form **[Post-deployment defect](https://github.com/shellworlds/OPNBNK4/issues/new?template=post-deployment-defect.yml)** (template under `.github/ISSUE_TEMPLATE/`).
 
 ## Escalation
 
