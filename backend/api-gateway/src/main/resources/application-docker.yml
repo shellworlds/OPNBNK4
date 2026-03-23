@@ -28,17 +28,35 @@ spring.cloud.gateway:
       uri: ${GATEWAY_ACCOUNT_URI:http://account-service:8081}
       predicates:
         - Path=/api/accounts/**
+      filters:
+        - name: CircuitBreaker
+          args:
+            name: accountCb
+            fallbackUri: forward:/fallback/accounts
     - id: transaction-service
       uri: ${GATEWAY_TRANSACTION_URI:http://transaction-service:8082}
       predicates:
         - Path=/api/transactions/**
+      filters:
+        - name: CircuitBreaker
+          args:
+            name: transactionCb
+            fallbackUri: forward:/fallback/transactions
     - id: openbanking-service
       uri: ${GATEWAY_OPENBANKING_URI:http://openbanking-service:8083}
       predicates:
         - Path=/openbanking/**
       filters:
+        - name: CircuitBreaker
+          args:
+            name: openbankingCb
+            fallbackUri: forward:/fallback/openbanking
         - name: RequestRateLimiter
           args:
             redis-rate-limiter.replenishRate: 20
             redis-rate-limiter.burstCapacity: 40
             key-resolver: "#{@openbankingRateLimitKeyResolver}"
+
+gateway:
+  channel-validation:
+    enabled: ${GATEWAY_CHANNEL_VALIDATION_ENABLED:true}

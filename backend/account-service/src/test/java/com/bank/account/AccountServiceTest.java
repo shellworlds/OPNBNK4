@@ -8,6 +8,7 @@ import static org.mockito.Mockito.when;
 
 import com.bank.account.domain.Account;
 import com.bank.account.domain.AccountHolder;
+import com.bank.account.integration.CoreSimulatorClient;
 import com.bank.account.domain.AccountStatus;
 import com.bank.account.domain.AccountType;
 import com.bank.account.repository.AccountHolderRepository;
@@ -18,11 +19,12 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.web.server.ResponseStatusException;
 
 @ExtendWith(MockitoExtension.class)
@@ -34,8 +36,15 @@ class AccountServiceTest {
     @Mock
     private AccountHolderRepository holders;
 
-    @InjectMocks
+    @Mock
+    private ObjectProvider<CoreSimulatorClient> coreSimulatorClient;
+
     private AccountService service;
+
+    @BeforeEach
+    void setUp() {
+        service = new AccountService(accounts, holders, coreSimulatorClient);
+    }
 
     @Test
     void createPersistsNewAccount() {

@@ -71,6 +71,33 @@ services:
     networks:
       - bank-net
 
+  core-simulator:
+    build: ./backend/core-simulator
+    networks:
+      - bank-net
+
+  fraud-detection-service:
+    build: ./backend/fraud-detection-service
+    depends_on:
+      kafka:
+        condition: service_started
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:29092
+    networks:
+      - bank-net
+
+  notification-service:
+    build: ./backend/notification-service
+    depends_on:
+      kafka:
+        condition: service_started
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:29092
+    networks:
+      - bank-net
+
   account-service:
     build: ./backend/account-service
     depends_on:
@@ -78,10 +105,18 @@ services:
         condition: service_healthy
       kafka:
         condition: service_started
+      redis:
+        condition: service_started
+      core-simulator:
+        condition: service_started
     environment:
       SPRING_PROFILES_ACTIVE: docker
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:29092
       DAY2_KAFKA_CONSUMER_ENABLED: "true"
+      SPRING_DATA_REDIS_HOST: redis
+      SPRING_CACHE_TYPE: redis
+      CORE_INTEGRATION_ENABLED: "true"
+      CORE_INTEGRATION_BASE_URL: http://core-simulator:8087
     networks:
       - bank-net
 
@@ -94,11 +129,15 @@ services:
         condition: service_started
       account-service:
         condition: service_started
+      fraud-detection-service:
+        condition: service_started
     environment:
       SPRING_PROFILES_ACTIVE: docker
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:29092
       ACCOUNT_SERVICE_BASE_URL: http://account-service:8081
       DAY2_KAFKA_PRODUCER_ENABLED: "true"
+      FRAUD_EVALUATION_ENABLED: "true"
+      FRAUD_EVALUATION_BASE_URL: http://fraud-detection-service:8088
     networks:
       - bank-net
 
@@ -134,6 +173,7 @@ services:
       GATEWAY_TRANSACTION_URI: http://transaction-service:8082
       GATEWAY_OPENBANKING_URI: http://openbanking-service:8083
       CORS_ALLOWED_ORIGINS: http://localhost:3000,http://localhost:3010,http://localhost:19006
+      GATEWAY_CHANNEL_VALIDATION_ENABLED: "true"
     networks:
       - bank-net
 

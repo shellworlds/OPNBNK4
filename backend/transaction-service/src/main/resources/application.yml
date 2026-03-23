@@ -25,6 +25,9 @@ spring.security.oauth2.resourceserver.jwt.issuer-uri: ${KEYCLOAK_ISSUER_URI:}
 
 account.service.base-url: ${ACCOUNT_SERVICE_BASE_URL:}
 
+fraud.evaluation.enabled: ${FRAUD_EVALUATION_ENABLED:false}
+fraud.evaluation.base-url: ${FRAUD_EVALUATION_BASE_URL:http://localhost:8088}
+
 day2:
   kafka:
     producer:

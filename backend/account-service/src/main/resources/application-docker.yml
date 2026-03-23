@@ -2,6 +2,14 @@ spring:
   config:
     activate:
       on-profile: docker
+  data:
+    redis:
+      host: ${SPRING_DATA_REDIS_HOST:redis}
+      port: ${SPRING_DATA_REDIS_PORT:6379}
+  cache:
+    type: ${SPRING_CACHE_TYPE:redis}
+    redis:
+      time-to-live: 60000
   datasource:
     url: jdbc:postgresql://postgres:5432/accountdb
     username: bank
@@ -21,3 +29,6 @@ spring.security.oauth2.resourceserver.jwt.issuer-uri: ${KEYCLOAK_ISSUER_URI:}
 spring.kafka.bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:kafka:29092}
 
 day2.kafka.consumer.enabled: ${DAY2_KAFKA_CONSUMER_ENABLED:true}
+
+core.integration.enabled: ${CORE_INTEGRATION_ENABLED:true}
+core.integration.base-url: ${CORE_INTEGRATION_BASE_URL:http://core-simulator:8087}

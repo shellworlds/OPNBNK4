@@ -48,7 +48,17 @@ class AccountControllerWebMvcTest {
         when(accountService.listForCustomer("c1"))
                 .thenReturn(
                         List.of(new AccountResponse(
-                                id, "c1", "GB82WEST12345698765432", AccountType.CHECKING, "GBP", BigDecimal.TEN, AccountStatus.ACTIVE, Instant.now(), 0L)));
+                                id,
+                                "c1",
+                                "GB82WEST12345698765432",
+                                AccountType.CHECKING,
+                                "GBP",
+                                BigDecimal.TEN,
+                                AccountStatus.ACTIVE,
+                                Instant.now(),
+                                0L,
+                                null,
+                                null)));
 
         mockMvc.perform(get("/api/accounts/customer/c1"))
                 .andExpect(status().isOk())
@@ -70,7 +80,17 @@ class AccountControllerWebMvcTest {
         when(accountService.createAccount(any()))
                 .thenReturn(
                         new AccountResponse(
-                                id, "c1", "GB82WEST12345698765432", AccountType.CHECKING, "GBP", BigDecimal.ZERO, AccountStatus.ACTIVE, Instant.now(), 0L));
+                                id,
+                                "c1",
+                                "GB82WEST12345698765432",
+                                AccountType.CHECKING,
+                                "GBP",
+                                BigDecimal.ZERO,
+                                AccountStatus.ACTIVE,
+                                Instant.now(),
+                                0L,
+                                null,
+                                null));
 
         var payload = new CreateAccountRequest("c1", "GB82WEST12345698765432", AccountType.CHECKING, "GBP", BigDecimal.ZERO);
 
@@ -88,7 +108,7 @@ class AccountControllerWebMvcTest {
         when(accountService.getAccount(eq(id)))
                 .thenReturn(
                         new AccountResponse(
-                                id, "c", "N1", AccountType.SAVINGS, "EUR", BigDecimal.ONE, AccountStatus.ACTIVE, Instant.now(), 1L));
+                                id, "c", "N1", AccountType.SAVINGS, "EUR", BigDecimal.ONE, AccountStatus.ACTIVE, Instant.now(), 1L, null, null));
         mockMvc.perform(get("/api/accounts/" + id)).andExpect(status().isOk()).andExpect(jsonPath("$.accountNumber").value("N1"));
     }
 }

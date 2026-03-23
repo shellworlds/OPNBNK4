@@ -16,10 +16,17 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 
+# Required when api-gateway runs with gateway.channel-validation.enabled (Docker default).
+DEFAULT_CHANNEL_HEADERS = {
+    "X-Client-Id": "smoke-e2e",
+    "X-Client-Channel": "automation",
+    "X-Device-Id": "smoke-device-1",
+}
+
 
 def http_json(method: str, url: str, body: object | None = None, headers: dict | None = None, timeout: float = 30):
     data = None
-    h = {"Accept": "application/json"}
+    h = {"Accept": "application/json", **DEFAULT_CHANNEL_HEADERS}
     if headers:
         h.update(headers)
     if body is not None:
@@ -53,7 +60,7 @@ def wait_backend_routes(gateway: str, attempts: int = 90, delay: float = 2.0) ->
     last_err: Exception | None = None
     for _ in range(attempts):
         try:
-            req = urllib.request.Request(url, method="GET")
+            req = urllib.request.Request(url, method="GET", headers={"Accept": "application/json", **DEFAULT_CHANNEL_HEADERS})
             with urllib.request.urlopen(req, timeout=10) as r:
                 if r.status == 200:
                     return

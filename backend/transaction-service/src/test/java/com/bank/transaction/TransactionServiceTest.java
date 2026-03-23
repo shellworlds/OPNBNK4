@@ -14,6 +14,7 @@ import com.bank.transaction.repository.TransactionEventRepository;
 import com.bank.transaction.repository.TransactionRepository;
 import com.bank.transaction.service.TransactionService;
 import com.bank.transaction.web.dto.CreateTransactionRequest;
+import org.springframework.beans.factory.ObjectProvider;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.math.BigDecimal;
 import java.util.Optional;
@@ -37,11 +38,14 @@ class TransactionServiceTest {
     @Mock
     private AccountValidationClient accountValidationClient;
 
+    @Mock
+    private ObjectProvider<com.bank.transaction.client.FraudEvaluationClient> fraudClient;
+
     private TransactionService service;
 
     @BeforeEach
     void setUp() {
-        service = new TransactionService(transactions, events, accountValidationClient, new ObjectMapper());
+        service = new TransactionService(transactions, events, accountValidationClient, new ObjectMapper(), fraudClient);
     }
 
     @Test
@@ -68,7 +72,7 @@ class TransactionServiceTest {
         when(transactions.findById(id)).thenReturn(Optional.of(tx));
         when(transactions.save(any(Transaction.class))).thenAnswer(inv -> inv.getArgument(0));
 
-        var res = service.completeTransaction(id);
+        var res = service.completeTransaction(id, "device-1");
 
         assertThat(res.status()).isEqualTo(TransactionStatus.COMPLETED);
         ArgumentCaptor<TransactionEvent> cap = ArgumentCaptor.forClass(TransactionEvent.class);

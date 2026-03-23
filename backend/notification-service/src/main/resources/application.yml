@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: notification-service
+  kafka:
+    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    consumer:
+      group-id: notification-service
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+day3:
+  kafka:
+    topics:
+      transaction-completed: bank.transaction.completed
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus

@@ -4,6 +4,7 @@ import com.bank.account.domain.Account;
 import com.bank.account.domain.AccountHolder;
 import com.bank.account.domain.AccountStatus;
 import com.bank.account.domain.HolderRole;
+import com.bank.account.integration.CoreSimulatorClient;
 import com.bank.account.repository.AccountHolderRepository;
 import com.bank.account.repository.AccountRepository;
 import com.bank.account.web.dto.AccountResponse;
@@ -12,6 +13,9 @@ import com.bank.account.web.dto.CreateAccountRequest;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
+import org.springframework.beans.factory.ObjectProvider;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
@@ -23,10 +27,15 @@ public class AccountService {
 
     private final AccountRepository accountRepository;
     private final AccountHolderRepository accountHolderRepository;
+    private final ObjectProvider<CoreSimulatorClient> coreSimulatorClient;
 
-    public AccountService(AccountRepository accountRepository, AccountHolderRepository accountHolderRepository) {
+    public AccountService(
+            AccountRepository accountRepository,
+            AccountHolderRepository accountHolderRepository,
+            ObjectProvider<CoreSimulatorClient> coreSimulatorClient) {
         this.accountRepository = accountRepository;
         this.accountHolderRepository = accountHolderRepository;
+        this.coreSimulatorClient = coreSimulatorClient;
     }
 
     @Transactional
@@ -47,11 +56,22 @@ public class AccountService {
     }
 
     @Transactional(readOnly = true)
+    @Cacheable(value = "accounts", key = "#id")
     public AccountResponse getAccount(UUID id) {
-        return accountRepository
-                .findById(id)
-                .map(AccountResponse::from)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found"));
+        Account account =
+                accountRepository
+                        .findById(id)
+                        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found"));
+        var core = coreSimulatorClient.getIfAvailable();
+        if (core == null) {
+            return AccountResponse.from(account);
+        }
+        var ledger = core.fetchLedger(id.toString());
+        var customer = core.fetchCustomer(account.getCustomerId());
+        return AccountResponse.from(
+                account,
+                ledger != null ? ledger.bookBalance() : null,
+                customer != null ? customer.displayName() : null);
     }
 
     @Transactional(readOnly = true)
@@ -66,6 +86,7 @@ public class AccountService {
     }
 
     @Transactional
+    @CacheEvict(value = "accounts", key = "#id")
     public AccountResponse adjustBalance(UUID id, BalanceAdjustRequest request) {
         return AccountResponse.from(applyBalanceMovement(id, request.amount(), request.type(), request.currency()));
     }
@@ -74,6 +95,7 @@ public class AccountService {
      * Used by REST and Kafka consumer. Amount is always positive; type CREDIT adds, DEBIT subtracts.
      */
     @Transactional
+    @CacheEvict(value = "accounts", key = "#accountId")
     public Account applyBalanceMovement(UUID accountId, BigDecimal amount, String type, String currency) {
         try {
             Account account = accountRepository

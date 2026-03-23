@@ -25,7 +25,8 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 
 @SpringBootTest(
         properties = {
-            "spring.autoconfigure.exclude=org.springframework.boot.autoconfigure.kafka.KafkaAutoConfiguration",
+            "spring.autoconfigure.exclude=org.springframework.boot.autoconfigure.kafka.KafkaAutoConfiguration,org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration,org.springframework.boot.autoconfigure.data.redis.RedisRepositoriesAutoConfiguration",
+            "spring.cache.type=none",
             "day2.kafka.consumer.enabled=false",
             "spring.flyway.enabled=true",
             "spring.jpa.hibernate.ddl-auto=validate"

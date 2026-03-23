@@ -77,3 +77,30 @@ flowchart TB
 - **Observability**: Standardize on OpenTelemetry-compatible traces and structured logs in later days.
 - **Deployment**: Local Docker Compose now; Kubernetes under `infrastructure/k8s/` for cluster targets.
 - **Environments**: Dev uses H2 optional profile; Compose uses PostgreSQL with the `docker` Spring profile.
+
+## Day 3 — Omni-channel, core simulator, fraud
+
+```mermaid
+flowchart LR
+  MOB[Mobile / Expo web export]
+  WEB[Web portal]
+  GW[API Gateway]
+  CORE[core-simulator]
+  FR[fraud-detection-service]
+  NOTIF[notification-service]
+
+  MOB --> GW
+  WEB --> GW
+  GW --> CORE
+  GW --> FR
+  TX[transaction-service] --> FR
+  TX --> KF[[Kafka]]
+  FR --> KF
+  NOTIF --> KF
+```
+
+- **Channel validation**: Clients send `X-Client-Id` and `X-Client-Channel` (enforced in Docker via the gateway). Optional `X-Device-Id` is forwarded for fraud rules.
+- **Core banking**: `core-simulator` exposes REST ledger/customer stubs; `account-service` enriches `GET /api/accounts/{id}` with core fields and uses Resilience4j circuit breakers when the simulator is unavailable.
+- **Fraud**: `transaction-service` calls `fraud-detection-service` synchronously before completing a transaction; Kafka listeners still process `TransactionCreated` for async scoring. Amount and device fingerprint rules apply; `BLOCK` returns HTTP 403.
+- **Caching**: Account reads use Spring Cache with Redis (60s TTL) in Docker; balance updates evict the cache entry.
+- **Gateway resilience**: Resilience4j circuit breakers on routed services with JSON fallback payloads from `/fallback/*`.

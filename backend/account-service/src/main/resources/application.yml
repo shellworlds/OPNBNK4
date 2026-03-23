@@ -29,6 +29,21 @@ spring:
 # OAuth2: set issuer in docker profile (Keycloak). Empty = permit all for local dev/tests.
 spring.security.oauth2.resourceserver.jwt.issuer-uri: ${KEYCLOAK_ISSUER_URI:}
 
+spring.cache.type: ${SPRING_CACHE_TYPE:none}
+
+core:
+  integration:
+    enabled: ${CORE_INTEGRATION_ENABLED:false}
+    base-url: ${CORE_INTEGRATION_BASE_URL:http://localhost:8087}
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      coreSimulator:
+        slidingWindowSize: 10
+        failureRateThreshold: 50
+        waitDurationInOpenState: 15s
+
 day2:
   kafka:
     consumer:

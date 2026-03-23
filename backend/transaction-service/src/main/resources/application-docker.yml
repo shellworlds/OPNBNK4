@@ -20,6 +20,9 @@ spring.kafka.bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:kafka:29092}
 
 account.service.base-url: ${ACCOUNT_SERVICE_BASE_URL:http://account-service:8081}
 
+fraud.evaluation.enabled: ${FRAUD_EVALUATION_ENABLED:false}
+fraud.evaluation.base-url: ${FRAUD_EVALUATION_BASE_URL:http://fraud-detection-service:8088}
+
 day2.kafka.producer.enabled: ${DAY2_KAFKA_PRODUCER_ENABLED:true}
 
 spring.security.oauth2.resourceserver.jwt.issuer-uri: ${KEYCLOAK_ISSUER_URI:}

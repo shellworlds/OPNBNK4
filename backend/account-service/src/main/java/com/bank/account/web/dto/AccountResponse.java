@@ -16,9 +16,15 @@ public record AccountResponse(
         BigDecimal balance,
         AccountStatus status,
         Instant createdAt,
-        Long version) {
+        Long version,
+        BigDecimal coreLedgerBookBalance,
+        String coreCustomerDisplayName) {
 
     public static AccountResponse from(Account a) {
+        return from(a, null, null);
+    }
+
+    public static AccountResponse from(Account a, BigDecimal coreLedgerBookBalance, String coreCustomerDisplayName) {
         return new AccountResponse(
                 a.getId(),
                 a.getCustomerId(),
@@ -28,6 +34,8 @@ public record AccountResponse(
                 a.getBalance(),
                 a.getStatus(),
                 a.getCreatedAt(),
-                a.getVersion());
+                a.getVersion(),
+                coreLedgerBookBalance,
+                coreCustomerDisplayName);
     }
 }

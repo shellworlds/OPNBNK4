@@ -26,14 +26,48 @@ spring:
           uri: ${GATEWAY_ACCOUNT_URI:http://account-service:8081}
           predicates:
             - Path=/api/accounts/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: accountCb
+                fallbackUri: forward:/fallback/accounts
         - id: transaction-service
           uri: ${GATEWAY_TRANSACTION_URI:http://transaction-service:8082}
           predicates:
             - Path=/api/transactions/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: transactionCb
+                fallbackUri: forward:/fallback/transactions
         - id: openbanking-service
           uri: ${GATEWAY_OPENBANKING_URI:http://openbanking-service:8083}
           predicates:
             - Path=/openbanking/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: openbankingCb
+                fallbackUri: forward:/fallback/openbanking
+
+gateway:
+  channel-validation:
+    enabled: ${GATEWAY_CHANNEL_VALIDATION_ENABLED:false}
+
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        slidingWindowSize: 10
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10s
+    instances:
+      accountCb:
+        baseConfig: default
+      transactionCb:
+        baseConfig: default
+      openbankingCb:
+        baseConfig: default
 
 management:
   endpoints:
