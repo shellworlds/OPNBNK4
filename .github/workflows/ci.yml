@@ -34,6 +34,28 @@ jobs:
           chmod +x gradlew
           ./gradlew test bootJar --no-daemon
 
+  java-postgres-integration:
+    runs-on: ubuntu-latest
+    needs: [java-services]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: "21"
+          distribution: temurin
+
+      - name: Run Postgres Testcontainers integration tests
+        env:
+          TESTCONTAINERS_RYUK_DISABLED: "true"
+        run: |
+          set -e
+          for svc in account-service transaction-service openbanking-service; do
+            echo "==> $svc Postgres IT"
+            (cd "backend/$svc" && chmod +x gradlew && ./gradlew test --tests '*Postgres*IntegrationTest' --no-daemon)
+          done
+
   react-web-portal:
     runs-on: ubuntu-latest
     steps:
@@ -58,7 +80,7 @@ jobs:
 
   docker-validate:
     runs-on: ubuntu-latest
-    needs: [java-services, react-web-portal]
+    needs: [java-services, java-postgres-integration, react-web-portal]
     steps:
       - uses: actions/checkout@v4
 

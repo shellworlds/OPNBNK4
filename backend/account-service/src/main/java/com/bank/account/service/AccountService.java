@@ -59,6 +59,12 @@ public class AccountService {
         return accountRepository.findByCustomerId(customerId).stream().map(AccountResponse::from).toList();
     }
 
+    /** Convenience listing for gateway health/smoke (not for production exposure without auth). */
+    @Transactional(readOnly = true)
+    public List<AccountResponse> listAll() {
+        return accountRepository.findAll().stream().map(AccountResponse::from).toList();
+    }
+
     @Transactional
     public AccountResponse adjustBalance(UUID id, BalanceAdjustRequest request) {
         return AccountResponse.from(applyBalanceMovement(id, request.amount(), request.type(), request.currency()));

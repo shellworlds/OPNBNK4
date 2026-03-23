@@ -3,6 +3,7 @@ package com.bank.openbanking;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.bank.openbanking.domain.Consent;
+import com.bank.openbanking.domain.ConsentStatus;
 import com.bank.openbanking.repository.ConsentRepository;
 import java.time.Instant;
 import org.junit.jupiter.api.Test;
@@ -21,8 +22,9 @@ class ConsentRepositoryTest {
 
     @Test
     void saveAndFind() {
-        var c = new Consent("tpp-1", "a,b", "cust", Instant.now().plusSeconds(3600));
+        var c = new Consent("cust-1", "tpp-aisp-demo", "[\"accounts:read\"]", Instant.now(), null);
         em.persistFlushFind(c);
         assertThat(repository.findAll()).hasSize(1);
+        assertThat(c.getStatus()).isEqualTo(ConsentStatus.ACTIVE);
     }
 }

@@ -1,4 +1,4 @@
-FROM node:20-alpine
+FROM node:20-alpine AS build
 WORKDIR /app
 
 COPY package.json package-lock.json ./
@@ -6,11 +6,21 @@ RUN npm ci
 
 COPY . .
 
-ENV BROWSER=none
-ENV CHOKIDAR_USEPOLLING=true
-ENV WATCHPACK_POLLING=true
-ENV REACT_APP_GATEWAY_URL=http://localhost:8080
+ARG REACT_APP_GATEWAY_URL=http://localhost:8080
+ENV REACT_APP_GATEWAY_URL=$REACT_APP_GATEWAY_URL
+ARG REACT_APP_KEYCLOAK_URL=
+ENV REACT_APP_KEYCLOAK_URL=$REACT_APP_KEYCLOAK_URL
+ARG REACT_APP_KEYCLOAK_REALM=digital-banking
+ENV REACT_APP_KEYCLOAK_REALM=$REACT_APP_KEYCLOAK_REALM
+ARG REACT_APP_KEYCLOAK_CLIENT_ID=web-portal
+ENV REACT_APP_KEYCLOAK_CLIENT_ID=$REACT_APP_KEYCLOAK_CLIENT_ID
+ARG REACT_APP_MOCK_CUSTOMER_ID=open-sample-uk-001
+ENV REACT_APP_MOCK_CUSTOMER_ID=$REACT_APP_MOCK_CUSTOMER_ID
 
+RUN npm run build
+
+FROM nginx:1.27-alpine
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=build /app/build /usr/share/nginx/html
 EXPOSE 3000
-
-CMD ["npm", "start"]
+CMD ["nginx", "-g", "daemon off;"]

@@ -1,0 +1,9 @@
+spring:
+  flyway:
+    enabled: false
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+
+account.service.base-url: ""
+transaction.service.base-url: ""

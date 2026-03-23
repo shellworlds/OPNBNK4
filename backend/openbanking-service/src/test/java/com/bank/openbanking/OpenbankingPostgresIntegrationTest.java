@@ -7,9 +7,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import static org.hamcrest.Matchers.hasSize;
-
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -18,12 +17,19 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
-@SpringBootTest
-@AutoConfigureMockMvc
+@SpringBootTest(
+        properties = {
+            "spring.flyway.enabled=true",
+            "spring.jpa.hibernate.ddl-auto=validate",
+            "account.service.base-url=",
+            "transaction.service.base-url="
+        })
+@AutoConfigureMockMvc(addFilters = false)
 @Testcontainers
 class OpenbankingPostgresIntegrationTest {
 
@@ -40,7 +46,6 @@ class OpenbankingPostgresIntegrationTest {
         registry.add("spring.datasource.username", POSTGRES::getUsername);
         registry.add("spring.datasource.password", POSTGRES::getPassword);
         registry.add("spring.datasource.driver-class-name", () -> "org.postgresql.Driver");
-        registry.add("spring.jpa.hibernate.ddl-auto", () -> "create-drop");
         registry.add("spring.jpa.properties.hibernate.dialect", () -> "org.hibernate.dialect.PostgreSQLDialect");
     }
 
@@ -56,28 +61,25 @@ class OpenbankingPostgresIntegrationTest {
         JsonNode consents = root.get("consents");
 
         for (JsonNode c : consents) {
-            var payload = objectMapper.createObjectNode();
-            payload.put("tppId", c.get("tppId").asText());
+            ObjectNode payload = objectMapper.createObjectNode();
             payload.put("customerId", c.get("customerId").asText());
+            payload.put("tppId", c.get("tppId").asText());
             ArrayNode scopes = objectMapper.createArrayNode();
             for (JsonNode s : c.get("scopes")) {
                 scopes.add(s.asText());
             }
             payload.set("scopes", scopes);
-            if (c.hasNonNull("validUntil")) {
-                payload.put("validUntil", c.get("validUntil").asText());
-            }
 
-            mockMvc.perform(
-                            post("/api/openbanking/consents")
-                                    .contentType(MediaType.APPLICATION_JSON)
-                                    .content(objectMapper.writeValueAsString(payload)))
-                    .andExpect(status().isCreated())
-                    .andExpect(jsonPath("$.tppId").value(c.get("tppId").asText()));
+            MvcResult res =
+                    mockMvc.perform(
+                                    post("/openbanking/consents")
+                                            .contentType(MediaType.APPLICATION_JSON)
+                                            .content(objectMapper.writeValueAsString(payload)))
+                            .andExpect(status().isCreated())
+                            .andReturn();
+
+            String id = objectMapper.readTree(res.getResponse().getContentAsString()).get("consentId").asText();
+            mockMvc.perform(get("/openbanking/consents/" + id)).andExpect(status().isOk());
         }
-
-        mockMvc.perform(get("/api/openbanking/consents"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(consents.size())));
     }
 }

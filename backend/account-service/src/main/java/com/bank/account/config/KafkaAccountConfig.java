@@ -6,5 +6,5 @@ import org.springframework.kafka.annotation.EnableKafka;
 
 @Configuration
 @EnableKafka
-@ConditionalOnProperty(name = "day2.kafka.consumer.enabled", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(name = "day2.kafka.consumer.enabled", havingValue = "true")
 public class KafkaAccountConfig {}

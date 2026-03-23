@@ -7,7 +7,16 @@ spring:
     username: bank
     password: bank
     driver-class-name: org.postgresql.Driver
+  flyway:
+    enabled: true
   jpa:
+    hibernate:
+      ddl-auto: validate
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+
+spring.security.oauth2.resourceserver.jwt.issuer-uri: ${KEYCLOAK_ISSUER_URI:}
+
+account.service.base-url: ${ACCOUNT_SERVICE_BASE_URL:http://account-service:8081}
+transaction.service.base-url: ${TRANSACTION_SERVICE_BASE_URL:http://transaction-service:8082}

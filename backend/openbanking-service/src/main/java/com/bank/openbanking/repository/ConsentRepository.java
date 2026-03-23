@@ -1,11 +1,13 @@
 package com.bank.openbanking.repository;
 
 import com.bank.openbanking.domain.Consent;
-import java.util.List;
+import com.bank.openbanking.domain.ConsentStatus;
+import java.util.Optional;
 import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ConsentRepository extends JpaRepository<Consent, UUID> {
 
-    List<Consent> findByCustomerIdOrderByCreatedAtDesc(String customerId);
+    Optional<Consent> findFirstByTppExternalIdAndCustomerIdAndStatusOrderByCreatedAtDesc(
+            String tppExternalId, String customerId, ConsentStatus status);
 }

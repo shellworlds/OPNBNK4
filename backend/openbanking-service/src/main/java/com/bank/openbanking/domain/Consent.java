@@ -12,67 +12,76 @@ import java.time.Instant;
 import java.util.UUID;
 
 @Entity
-@Table(name = "openbanking_consents")
+@Table(name = "consents")
 public class Consent {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(nullable = false, length = 128)
-    private String tppId;
+    @Column(name = "customer_id", nullable = false, length = 128)
+    private String customerId;
 
-    @Column(nullable = false, length = 512)
-    private String scopes;
+    @Column(name = "tpp_external_id", nullable = false, length = 128)
+    private String tppExternalId;
+
+    @Column(nullable = false, columnDefinition = "TEXT")
+    private String permissions;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 16)
     private ConsentStatus status = ConsentStatus.ACTIVE;
 
-    @Column(nullable = false, length = 128)
-    private String customerId;
+    @Column(name = "valid_from", nullable = false)
+    private Instant validFrom = Instant.now();
 
-    @Column(nullable = false)
+    @Column(name = "valid_to")
+    private Instant validTo;
+
+    @Column(name = "created_at", nullable = false)
     private Instant createdAt = Instant.now();
-
-    @Column
-    private Instant validUntil;
 
     protected Consent() {}
 
-    public Consent(String tppId, String scopes, String customerId, Instant validUntil) {
-        this.tppId = tppId;
-        this.scopes = scopes;
+    public Consent(
+            String customerId, String tppExternalId, String permissions, Instant validFrom, Instant validTo) {
         this.customerId = customerId;
-        this.validUntil = validUntil;
+        this.tppExternalId = tppExternalId;
+        this.permissions = permissions;
+        this.validFrom = validFrom != null ? validFrom : Instant.now();
+        this.validTo = validTo;
     }
 
     public UUID getId() {
         return id;
     }
 
-    public String getTppId() {
-        return tppId;
+    public String getCustomerId() {
+        return customerId;
     }
 
-    public String getScopes() {
-        return scopes;
+    public String getTppExternalId() {
+        return tppExternalId;
+    }
+
+    public String getPermissions() {
+        return permissions;
     }
 
     public ConsentStatus getStatus() {
         return status;
     }
 
-    public String getCustomerId() {
-        return customerId;
+    public Instant getValidFrom() {
+        return validFrom;
+    }
+
+    public Instant getValidTo() {
+        return validTo;
     }
 
     public Instant getCreatedAt() {
         return createdAt;
-    }
-
-    public Instant getValidUntil() {
-        return validUntil;
     }
 
     public void setStatus(ConsentStatus status) {

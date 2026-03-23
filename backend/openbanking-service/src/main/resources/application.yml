@@ -9,10 +9,17 @@ spring:
     driver-class-name: org.h2.Driver
     username: sa
     password:
+  flyway:
+    enabled: false
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: false
+
+spring.security.oauth2.resourceserver.jwt.issuer-uri: ${KEYCLOAK_ISSUER_URI:}
+
+account.service.base-url: ${ACCOUNT_SERVICE_BASE_URL:}
+transaction.service.base-url: ${TRANSACTION_SERVICE_BASE_URL:}
 
 management:
   endpoints:

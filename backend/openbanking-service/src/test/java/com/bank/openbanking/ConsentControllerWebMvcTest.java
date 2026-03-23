@@ -9,9 +9,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.bank.openbanking.domain.ConsentStatus;
 import com.bank.openbanking.service.ConsentService;
-import com.bank.openbanking.web.ConsentController;
+import com.bank.openbanking.web.OpenbankingConsentController;
 import com.bank.openbanking.web.RestExceptionHandler;
 import com.bank.openbanking.web.dto.ConsentResponse;
+import com.bank.openbanking.web.dto.CreateConsentRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.time.Instant;
 import java.util.List;
@@ -25,7 +26,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-@WebMvcTest(controllers = ConsentController.class, excludeAutoConfiguration = SecurityAutoConfiguration.class)
+@WebMvcTest(controllers = OpenbankingConsentController.class, excludeAutoConfiguration = SecurityAutoConfiguration.class)
 @Import(RestExceptionHandler.class)
 class ConsentControllerWebMvcTest {
 
@@ -39,33 +40,43 @@ class ConsentControllerWebMvcTest {
     private ConsentService consentService;
 
     @Test
-    void list() throws Exception {
-        UUID id = UUID.randomUUID();
-        when(consentService.listAll())
-                .thenReturn(
-                        List.of(
-                                new ConsentResponse(
-                                        id, "tpp", List.of("accounts:read"), ConsentStatus.ACTIVE, "c", Instant.now(), null)));
-        mockMvc.perform(get("/api/openbanking/consents"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].tppId").value("tpp"));
-    }
-
-    @Test
     void create201() throws Exception {
         UUID id = UUID.randomUUID();
         when(consentService.create(any()))
                 .thenReturn(
                         new ConsentResponse(
-                                id, "tpp", List.of("a"), ConsentStatus.ACTIVE, "c", Instant.now(), null));
+                                id,
+                                "c",
+                                "tpp",
+                                List.of("a"),
+                                ConsentStatus.ACTIVE,
+                                Instant.now(),
+                                null,
+                                Instant.now()));
         mockMvc.perform(
-                        post("/api/openbanking/consents")
+                        post("/openbanking/consents")
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(
                                         objectMapper.writeValueAsString(
-                                                new com.bank.openbanking.web.dto.CreateConsentRequest(
-                                                        "tpp", List.of("a"), "c", null))))
+                                                new CreateConsentRequest("c", "tpp", List.of("a"), null, null, null))))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.consentId").value(id.toString()));
+    }
+
+    @Test
+    void getById() throws Exception {
+        UUID id = UUID.randomUUID();
+        when(consentService.getById(id))
+                .thenReturn(
+                        new ConsentResponse(
+                                id,
+                                "c",
+                                "tpp",
+                                List.of("x"),
+                                ConsentStatus.ACTIVE,
+                                Instant.now(),
+                                null,
+                                Instant.now()));
+        mockMvc.perform(get("/openbanking/consents/" + id)).andExpect(status().isOk()).andExpect(jsonPath("$.tppId").value("tpp"));
     }
 }

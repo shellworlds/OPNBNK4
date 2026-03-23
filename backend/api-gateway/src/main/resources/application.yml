@@ -1,11 +1,26 @@
 server:
   port: 8080
 
+# Client headers (including Authorization) are forwarded to downstream services by default — no extra token-relay filter required.
 spring:
   application:
     name: api-gateway
   cloud:
     gateway:
+      globalcors:
+        corsConfigurations:
+          "[/**]":
+            allowedOrigins: "${CORS_ALLOWED_ORIGINS:http://localhost:3000}"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowedHeaders: "*"
+            allowCredentials: true
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials RETAIN_FIRST
       routes:
         - id: account-service
           uri: ${GATEWAY_ACCOUNT_URI:http://account-service:8081}
@@ -18,7 +33,7 @@ spring:
         - id: openbanking-service
           uri: ${GATEWAY_OPENBANKING_URI:http://openbanking-service:8083}
           predicates:
-            - Path=/api/openbanking/**
+            - Path=/openbanking/**
 
 management:
   endpoints:

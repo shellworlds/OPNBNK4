@@ -1,0 +1,44 @@
+# Docker profile: Redis-backed rate limiting on open banking routes.
+spring:
+  config:
+    activate:
+      on-profile: docker
+  data:
+    redis:
+      host: ${SPRING_DATA_REDIS_HOST:redis}
+      port: ${SPRING_DATA_REDIS_PORT:6379}
+
+spring.cloud.gateway:
+  globalcors:
+    corsConfigurations:
+      "[/**]":
+        allowedOrigins: "${CORS_ALLOWED_ORIGINS:http://localhost:3000}"
+        allowedMethods:
+          - GET
+          - POST
+          - PUT
+          - DELETE
+          - OPTIONS
+        allowedHeaders: "*"
+        allowCredentials: true
+  default-filters:
+    - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials RETAIN_FIRST
+  routes:
+    - id: account-service
+      uri: ${GATEWAY_ACCOUNT_URI:http://account-service:8081}
+      predicates:
+        - Path=/api/accounts/**
+    - id: transaction-service
+      uri: ${GATEWAY_TRANSACTION_URI:http://transaction-service:8082}
+      predicates:
+        - Path=/api/transactions/**
+    - id: openbanking-service
+      uri: ${GATEWAY_OPENBANKING_URI:http://openbanking-service:8083}
+      predicates:
+        - Path=/openbanking/**
+      filters:
+        - name: RequestRateLimiter
+          args:
+            redis-rate-limiter.replenishRate: 20
+            redis-rate-limiter.burstCapacity: 40
+            key-resolver: "#{@openbankingRateLimitKeyResolver}"

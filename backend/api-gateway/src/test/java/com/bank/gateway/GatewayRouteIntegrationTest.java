@@ -47,7 +47,7 @@ class GatewayRouteIntegrationTest {
                                         .withStatus(200)
                                         .withHeader("Content-Type", "application/json")
                                         .withBody(
-                                                "[{\"id\":\"11111111-1111-1111-1111-111111111111\",\"iban\":\"GB82TEST\",\"currency\":\"GBP\",\"balance\":1,\"customerId\":\"c\",\"createdAt\":\"2026-01-01T00:00:00Z\"}]")));
+                                                "[{\"id\":\"11111111-1111-1111-1111-111111111111\",\"customerId\":\"c\",\"accountNumber\":\"GB82TEST\",\"accountType\":\"CHECKING\",\"currency\":\"GBP\",\"balance\":1,\"status\":\"ACTIVE\",\"createdAt\":\"2026-01-01T00:00:00Z\",\"version\":0}]")));
 
         webTestClient
                 .get()
@@ -56,7 +56,7 @@ class GatewayRouteIntegrationTest {
                 .expectStatus()
                 .isOk()
                 .expectBody()
-                .jsonPath("$[0].iban")
+                .jsonPath("$[0].accountNumber")
                 .isEqualTo("GB82TEST");
     }
 }

@@ -10,7 +10,7 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
 @Component
-@ConditionalOnProperty(name = "day2.kafka.consumer.enabled", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(name = "day2.kafka.consumer.enabled", havingValue = "true")
 public class TransactionCompletedConsumer {
 
     private static final Logger log = LoggerFactory.getLogger(TransactionCompletedConsumer.class);

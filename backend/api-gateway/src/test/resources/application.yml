@@ -14,4 +14,4 @@ spring:
         - id: openbanking-service
           uri: http://127.0.0.1:8765
           predicates:
-            - Path=/api/openbanking/**
+            - Path=/openbanking/**

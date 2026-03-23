@@ -2,26 +2,30 @@ package com.bank.openbanking.web.dto;
 
 import com.bank.openbanking.domain.Consent;
 import com.bank.openbanking.domain.ConsentStatus;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.time.Instant;
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
 public record ConsentResponse(
         UUID consentId,
-        String tppId,
-        List<String> scopes,
-        ConsentStatus status,
         String customerId,
-        Instant createdAt,
-        Instant validUntil) {
+        String tppId,
+        List<String> permissions,
+        ConsentStatus status,
+        Instant validFrom,
+        Instant validTo,
+        Instant createdAt) {
 
-    public static ConsentResponse from(Consent c) {
-        List<String> scopeList =
-                c.getScopes() == null || c.getScopes().isBlank()
-                        ? List.of()
-                        : Arrays.stream(c.getScopes().split(",")).map(String::trim).toList();
+    public static ConsentResponse from(Consent c, ObjectMapper mapper) {
+        List<String> perms;
+        try {
+            perms = mapper.readValue(c.getPermissions(), new TypeReference<>() {});
+        } catch (Exception e) {
+            perms = List.of();
+        }
         return new ConsentResponse(
-                c.getId(), c.getTppId(), scopeList, c.getStatus(), c.getCustomerId(), c.getCreatedAt(), c.getValidUntil());
+                c.getId(), c.getCustomerId(), c.getTppExternalId(), perms, c.getStatus(), c.getValidFrom(), c.getValidTo(), c.getCreatedAt());
     }
 }

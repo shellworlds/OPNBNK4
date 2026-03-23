@@ -84,6 +84,82 @@ h2 {
   text-decoration: underline;
 }
 
+button.link-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+  padding: 0;
+}
+
+.link-inline {
+  color: #38bdf8;
+  text-decoration: none;
+}
+
+.link-inline:hover {
+  text-decoration: underline;
+}
+
+.account-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  width: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
+.account-link:hover .iban {
+  color: #7dd3fc;
+}
+
+.tx-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.tx-list li {
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  gap: 0.5rem 1rem;
+  align-items: baseline;
+  font-size: 0.875rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #1e293b;
+}
+
+.tx-type {
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+}
+
+.tx-credit {
+  color: #4ade80;
+}
+
+.tx-debit {
+  color: #fb923c;
+}
+
+.tx-amt {
+  font-family: ui-monospace, monospace;
+}
+
+.tx-meta,
+.tx-desc {
+  color: #94a3b8;
+}
+
+.tx-desc {
+  grid-column: 1 / -1;
+}
+
 .panel {
   background: rgba(15, 23, 42, 0.6);
   border: 1px solid #334155;

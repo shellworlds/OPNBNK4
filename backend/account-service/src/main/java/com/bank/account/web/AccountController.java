@@ -32,6 +32,11 @@ public class AccountController {
         return accountService.createAccount(request);
     }
 
+    @GetMapping
+    public List<AccountResponse> listAll() {
+        return accountService.listAll();
+    }
+
     @GetMapping("/{id}")
     public AccountResponse getAccount(@PathVariable UUID id) {
         return accountService.getAccount(id);

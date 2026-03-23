@@ -19,3 +19,5 @@ spring:
 spring.security.oauth2.resourceserver.jwt.issuer-uri: ${KEYCLOAK_ISSUER_URI:}
 
 spring.kafka.bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:kafka:29092}
+
+day2.kafka.consumer.enabled: ${DAY2_KAFKA_CONSUMER_ENABLED:true}

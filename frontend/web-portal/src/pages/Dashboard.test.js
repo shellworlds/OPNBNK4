@@ -2,19 +2,26 @@ import { render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import Dashboard from './Dashboard';
 
-const originalFetch = global.fetch;
+jest.mock('../services/api', () => ({
+  getJson: jest.fn(),
+}));
+
+import { getJson } from '../services/api';
 
 afterEach(() => {
-  global.fetch = originalFetch;
+  jest.clearAllMocks();
 });
 
-test('loads accounts from gateway', async () => {
-  global.fetch = jest.fn().mockResolvedValue({
-    ok: true,
-    json: async () => [
-      { id: '1', iban: 'GB82TEST', currency: 'GBP', balance: 42 },
-    ],
-  });
+test('loads accounts for mock customer via gateway', async () => {
+  getJson.mockResolvedValue([
+    {
+      id: '1',
+      accountNumber: 'GB82TEST',
+      accountType: 'CHECKING',
+      currency: 'GBP',
+      balance: 42,
+    },
+  ]);
 
   render(
     <MemoryRouter initialEntries={[{ pathname: '/dashboard', state: { username: 'bob' } }]}>
@@ -26,11 +33,11 @@ test('loads accounts from gateway', async () => {
 
   expect(screen.getByText(/signed in as/i)).toBeInTheDocument();
   await waitFor(() => expect(screen.getByText('GB82TEST')).toBeInTheDocument());
-  expect(global.fetch).toHaveBeenCalled();
+  expect(getJson).toHaveBeenCalled();
 });
 
 test('shows error when gateway unreachable', async () => {
-  global.fetch = jest.fn().mockRejectedValue(new Error('network'));
+  getJson.mockRejectedValue(new Error('network'));
 
   render(
     <MemoryRouter initialEntries={[{ pathname: '/dashboard', state: { username: 'bob' } }]}>
