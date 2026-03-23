@@ -28,6 +28,8 @@ Welcome to the **[shellworlds/OPNBNK4](https://github.com/shellworlds/OPNBNK4)**
 | **Day 1 client test report** | [docs/day1-client-test-report.md](https://github.com/shellworlds/OPNBNK4/blob/main/docs/day1-client-test-report.md) |
 | **Verification logs (bundle)** | [docs/reports/day1-verification-2026-03-23/](https://github.com/shellworlds/OPNBNK4/tree/main/docs/reports/day1-verification-2026-03-23) |
 | **Day 3 verification log** | [docs/reports/day3-verification-2026-03-23/README.md](https://github.com/shellworlds/OPNBNK4/blob/main/docs/reports/day3-verification-2026-03-23/README.md) |
+| **Day 3 verification (full)** | [docs/submission/VERIFICATION_RESULTS_DAY3.md](https://github.com/shellworlds/OPNBNK4/blob/main/docs/submission/VERIFICATION_RESULTS_DAY3.md) |
+| **Submission index (root)** | [SUBMISSION_DAY3.md](https://github.com/shellworlds/OPNBNK4/blob/main/SUBMISSION_DAY3.md) |
 | **Verification log** | [docs/verification.md](https://github.com/shellworlds/OPNBNK4/blob/main/docs/verification.md) |
 | **Architecture** | [docs/architecture/](https://github.com/shellworlds/OPNBNK4/tree/main/docs/architecture) |
 | **Project board** | [Repository Projects](https://github.com/shellworlds/OPNBNK4/projects) · [OPNBNK4 Digital Banking Platform](https://github.com/users/shellworlds/projects/6) |

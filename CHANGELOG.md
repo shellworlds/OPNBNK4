@@ -15,6 +15,10 @@ All notable changes to **OPNBNK4** (Digital Banking Platform) are documented her
 - CI: Gradle matrix includes fraud, core-simulator, notification; Docker builds for those images; manual **Day 3 verify** workflow.
 - Dependabot: Gradle entries for new services; npm for **frontend/mobile-app**.
 
+### Fixed
+
+- **Docker / Compose:** Images for `account-service`, `transaction-service`, `fraud-detection-service`, and `notification-service` now use **`docker build` context `./backend`** so Gradle composite `includeBuild("../shared-libs/events")` resolves inside the image. CI `docker-validate` updated accordingly. Added `backend/.dockerignore`.
+
 ### Notes
 
 - Create GitHub **Release** tag `v0.3.0-day3` when publishing to clients. WebAuthn, Vault, full observability, and GHCR remain Day 4+.

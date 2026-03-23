@@ -15,6 +15,8 @@ done
 
 All listed services: **tests passed** (exit code 0).
 
+**Full tables + Docker/E2E:** [docs/submission/VERIFICATION_RESULTS_DAY3.md](../../submission/VERIFICATION_RESULTS_DAY3.md)
+
 ## Notes
 
 - Testcontainers may log Docker cleanup warnings (`permission denied` on container remove) on some hosts; JUnit still reported success.

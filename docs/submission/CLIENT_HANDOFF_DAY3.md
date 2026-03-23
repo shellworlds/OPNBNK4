@@ -8,6 +8,19 @@
 **Blob URL (direct link for reviewers):**  
 https://github.com/shellworlds/OPNBNK4/blob/main/docs/submission/CLIENT_HANDOFF_DAY3.md
 
+**Quick index:** [SUBMISSION_DAY3.md](https://github.com/shellworlds/OPNBNK4/blob/main/SUBMISSION_DAY3.md) (root) lists this file and verification outputs.
+
+---
+
+## Verification results (final)
+
+Automated and manual checks are recorded in **[VERIFICATION_RESULTS_DAY3.md](https://github.com/shellworlds/OPNBNK4/blob/main/docs/submission/VERIFICATION_RESULTS_DAY3.md)**:
+
+- All seven backend services: **Gradle `test` + `bootJar` — PASS**
+- Web portal: **npm test + build — PASS**
+- Docker: **composite `shared-libs/events` image build — PASS** (Dockerfiles use `context: ./backend`)
+- E2E smoke: **runs in CI**; locally requires Docker permission to start/stop the full stack
+
 ---
 
 ## One-line summary
@@ -44,7 +57,8 @@ Day 3 adds omni-channel readiness (Expo mobile app + static `mobile-web` in Comp
 | Dedicated issues (create on GitHub) | [docs/github/DAY3_DEDICATED_ISSUES.md](https://github.com/shellworlds/OPNBNK4/blob/main/docs/github/DAY3_DEDICATED_ISSUES.md) |
 | Day 2 handoff (previous milestone) | [docs/submission/CLIENT_HANDOFF_DAY2.md](https://github.com/shellworlds/OPNBNK4/blob/main/docs/submission/CLIENT_HANDOFF_DAY2.md) |
 | Wiki mirror (sync to live wiki) | [docs/wiki/](https://github.com/shellworlds/OPNBNK4/tree/main/docs/wiki) |
-| Local verification log (this run) | [docs/reports/day3-verification-2026-03-23/README.md](https://github.com/shellworlds/OPNBNK4/blob/main/docs/reports/day3-verification-2026-03-23/README.md) |
+| Local verification log | [docs/reports/day3-verification-2026-03-23/README.md](https://github.com/shellworlds/OPNBNK4/blob/main/docs/reports/day3-verification-2026-03-23/README.md) |
+| **Verification results (tables + outputs)** | [docs/submission/VERIFICATION_RESULTS_DAY3.md](https://github.com/shellworlds/OPNBNK4/blob/main/docs/submission/VERIFICATION_RESULTS_DAY3.md) |
 
 ---
 
@@ -84,8 +98,10 @@ After merge to `main`:
 |-------------|--------|
 | **Repository** | https://github.com/shellworlds/OPNBNK4 |
 | **Submission document** | https://github.com/shellworlds/OPNBNK4/blob/main/docs/submission/CLIENT_HANDOFF_DAY3.md |
+| **Verification results** | https://github.com/shellworlds/OPNBNK4/blob/main/docs/submission/VERIFICATION_RESULTS_DAY3.md |
+| **Quick index (root)** | https://github.com/shellworlds/OPNBNK4/blob/main/SUBMISSION_DAY3.md |
 
-**Optional:** Email or ticket body can be: *“Day 3 delivery: https://github.com/shellworlds/OPNBNK4 — submission summary: https://github.com/shellworlds/OPNBNK4/blob/main/docs/submission/CLIENT_HANDOFF_DAY3.md”*
+**Optional:** Email or ticket body can be: *“Day 3: https://github.com/shellworlds/OPNBNK4 — handoff https://github.com/shellworlds/OPNBNK4/blob/main/docs/submission/CLIENT_HANDOFF_DAY3.md — verification https://github.com/shellworlds/OPNBNK4/blob/main/docs/submission/VERIFICATION_RESULTS_DAY3.md”*
 
 ---
 

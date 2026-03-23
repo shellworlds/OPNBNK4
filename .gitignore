@@ -1,3 +1,7 @@
+# Partial Gradle scaffold (Day 4); keep only README
+backend/auth-service/*
+!backend/auth-service/README.md
+
 # Build
 **/build/
 **/target/

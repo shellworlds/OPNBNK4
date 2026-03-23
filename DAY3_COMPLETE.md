@@ -1,6 +1,10 @@
 # Day 3 completion summary
 
-**Client submission (share with stakeholders):** [docs/submission/CLIENT_HANDOFF_DAY3.md](docs/submission/CLIENT_HANDOFF_DAY3.md) — canonical URL: https://github.com/shellworlds/OPNBNK4/blob/main/docs/submission/CLIENT_HANDOFF_DAY3.md
+**Client submission (share with stakeholders):** [docs/submission/CLIENT_HANDOFF_DAY3.md](docs/submission/CLIENT_HANDOFF_DAY3.md) — canonical URL: https://github.com/shellworlds/OPNBNK4/blob/main/docs/submission/CLIENT_HANDOFF_DAY3.md  
+
+**Quick link:** [SUBMISSION_DAY3.md](SUBMISSION_DAY3.md)  
+
+**Verification outputs:** [docs/submission/VERIFICATION_RESULTS_DAY3.md](docs/submission/VERIFICATION_RESULTS_DAY3.md)
 
 **GitHub issues checklist:** [docs/github/DAY3_DEDICATED_ISSUES.md](docs/github/DAY3_DEDICATED_ISSUES.md)
 
@@ -17,10 +21,15 @@
 
 ## Verification
 
+**Recorded results:** see [docs/submission/VERIFICATION_RESULTS_DAY3.md](docs/submission/VERIFICATION_RESULTS_DAY3.md).
+
 ```bash
 docker compose up --build -d
-python3 infrastructure/scripts/smoke-e2e.py
+python3 infrastructure/scripts/smoke-e2e.py --gateway http://localhost:8080
+docker compose down -v --remove-orphans
 ```
+
+**Docker note:** services using `includeBuild("../shared-libs/events")` build with Compose **`context: ./backend`** and the updated Dockerfiles under each service folder.
 
 To exercise a **blocked** transaction, create a pending transaction with amount **> €50,000** equivalent (per `RuleEngine`) and call `POST /complete` with channel headers.
 

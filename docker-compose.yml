@@ -77,7 +77,9 @@ services:
       - bank-net
 
   fraud-detection-service:
-    build: ./backend/fraud-detection-service
+    build:
+      context: ./backend
+      dockerfile: fraud-detection-service/Dockerfile
     depends_on:
       kafka:
         condition: service_started
@@ -88,7 +90,9 @@ services:
       - bank-net
 
   notification-service:
-    build: ./backend/notification-service
+    build:
+      context: ./backend
+      dockerfile: notification-service/Dockerfile
     depends_on:
       kafka:
         condition: service_started
@@ -99,7 +103,9 @@ services:
       - bank-net
 
   account-service:
-    build: ./backend/account-service
+    build:
+      context: ./backend
+      dockerfile: account-service/Dockerfile
     depends_on:
       postgres:
         condition: service_healthy
@@ -121,7 +127,9 @@ services:
       - bank-net
 
   transaction-service:
-    build: ./backend/transaction-service
+    build:
+      context: ./backend
+      dockerfile: transaction-service/Dockerfile
     depends_on:
       postgres:
         condition: service_healthy

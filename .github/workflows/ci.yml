@@ -92,13 +92,13 @@ jobs:
 
       - name: Build service images (no push)
         run: |
-          docker build -t dbp-account:ci ./backend/account-service
-          docker build -t dbp-transaction:ci ./backend/transaction-service
+          docker build -f backend/account-service/Dockerfile -t dbp-account:ci backend
+          docker build -f backend/transaction-service/Dockerfile -t dbp-transaction:ci backend
           docker build -t dbp-openbanking:ci ./backend/openbanking-service
           docker build -t dbp-gateway:ci ./backend/api-gateway
           docker build -t dbp-core:ci ./backend/core-simulator
-          docker build -t dbp-fraud:ci ./backend/fraud-detection-service
-          docker build -t dbp-notify:ci ./backend/notification-service
+          docker build -f backend/fraud-detection-service/Dockerfile -t dbp-fraud:ci backend
+          docker build -f backend/notification-service/Dockerfile -t dbp-notify:ci backend
           docker build -t dbp-web:ci ./frontend/web-portal
 
   e2e-open-data-smoke:
