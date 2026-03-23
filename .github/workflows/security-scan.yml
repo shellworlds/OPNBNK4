@@ -11,7 +11,7 @@ jobs:
   trivy-fs:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Trivy filesystem
         uses: aquasecurity/trivy-action@0.24.0
         with:
@@ -30,7 +30,7 @@ jobs:
   trivy-image-gateway:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Build gateway image
         run: docker build -t opnbnk4-gateway:scan -f backend/api-gateway/Dockerfile ./backend/api-gateway
       - name: Trivy image
