@@ -8,6 +8,8 @@ The fixture file contains **IBAN-style strings commonly published as format / ch
 
 ## Automated tests (last run: 2026-03-23)
 
+**Raw logs:** [`reports/day1-verification-2026-03-23/`](reports/day1-verification-2026-03-23/README.md) · **Submission summary:** [`day1-complete-report.md`](day1-complete-report.md)
+
 | Scope | Count | Notes |
 |-------|------:|--------|
 | `backend/account-service` | **14** | Includes **Testcontainers PostgreSQL** `AccountPostgresIntegrationTest` loading the public fixture |

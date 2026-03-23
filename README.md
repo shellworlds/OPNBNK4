@@ -76,7 +76,7 @@ cd frontend/web-portal && npm test -- --watchAll=false
 - **PostgreSQL via Testcontainers**: `*PostgresIntegrationTest` in account, transaction, and openbanking services load **`infrastructure/fixtures/public-banking-samples.json`** (public IBAN-style examples, not real accounts).
 - **E2E smoke**: `python3 infrastructure/scripts/smoke-e2e.py` (or `infrastructure/scripts/smoke-e2e.sh`) against a running Compose stack; same flow runs in CI job `e2e-open-data-smoke`.
 
-See **`docs/verification.md`** for last recorded test counts and commands.
+See **`docs/day1-complete-report.md`** for a submission-ready Day 1 summary (with raw logs under **`docs/reports/day1-verification-2026-03-23/`**), and **`docs/verification.md`** for reproducible commands and counts.
 
 ### Git identity (local)
 

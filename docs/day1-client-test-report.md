@@ -5,6 +5,8 @@
 **Report date:** 23 March 2026  
 **Phase:** Day 1 — environment, scaffolding, architecture, CI/CD foundation, core APIs, automated tests  
 
+**Primary submission document:** [`day1-complete-report.md`](day1-complete-report.md) (programme summary, URLs, and link to raw log bundle [`reports/day1-verification-2026-03-23/`](reports/day1-verification-2026-03-23/README.md)).
+
 ---
 
 ## 1. Executive summary

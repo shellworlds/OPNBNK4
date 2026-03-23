@@ -1,0 +1,5 @@
+========== account-service ==========
+========== transaction-service ==========
+========== openbanking-service ==========
+========== api-gateway ==========
+Gradle services done.

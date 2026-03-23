@@ -1,0 +1,10 @@
+JUnit <testcase> counts from backend/*/build/test-results/test/*.xml after ./gradlew clean test
+
+account-service:        14
+transaction-service:     8
+openbanking-service:     8
+api-gateway:             3
+-------------------------
+TOTAL:                  33
+
+Frontend (npm test -- --watchAll=false): 4 passed (see npm-test.log)

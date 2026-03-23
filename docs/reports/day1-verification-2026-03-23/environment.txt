@@ -1,0 +1,11 @@
+Recorded at verification run (local host).
+
+OpenJDK: 21.0.10 (Ubuntu 24.04 package)
+Node.js: v20.20.0
+npm: 10.8.2
+Docker: 28.2.2
+Gradle: 8.8 (per-service wrapper)
+TESTCONTAINERS_RYUK_DISABLED=true (set for Gradle test runs)
+
+Git revision (main at run time): c3e54df6b80b61d0c2f440c3aeaf202ccf2124b1
+Remote: https://github.com/shellworlds/OPNBNK4

@@ -13,7 +13,7 @@ All notable changes to **OPNBNK4** (Digital Banking Platform) are documented her
 - GitHub Actions: CI (Gradle, npm, Docker), E2E smoke job, **Day 1 verify (manual)** workflow.
 - Automated tests: JUnit (incl. Testcontainers PostgreSQL + public IBAN-style fixtures), WireMock gateway IT, React tests.
 - Scripts: `infrastructure/scripts/smoke-e2e.py`, Postgres init SQL.
-- Client report: `docs/day1-client-test-report.md`; verification: `docs/verification.md`.
+- Client report: `docs/day1-client-test-report.md`; submission summary: `docs/day1-complete-report.md`; raw verification logs: `docs/reports/day1-verification-2026-03-23/`; verification: `docs/verification.md`.
 - Wiki mirror: `docs/wiki/`; README links to GitHub Project, Issues, Actions, Insights.
 
 ### Notes
