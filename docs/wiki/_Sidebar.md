@@ -7,6 +7,7 @@
 - [Day 4 — Delivery](Day-4-Delivery)
 - [Day 5 — Delivery](Day-5-Delivery)
 - [Day 6 — Delivery](Day-6-Delivery)
+- [Project complete — Days 1–6](Project-Complete)
 - [Project, Issues, Actions & Insights](GitHub-Project-Issues-Actions-Insights)
 - [Releases](Releases)
 

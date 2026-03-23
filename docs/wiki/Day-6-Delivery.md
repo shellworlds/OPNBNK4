@@ -14,3 +14,5 @@
 
 - [CLIENT_HANDOFF_DAY6.md](https://github.com/shellworlds/OPNBNK4/blob/main/docs/submission/CLIENT_HANDOFF_DAY6.md)
 - [DAY6_COMPLETE.md](https://github.com/shellworlds/OPNBNK4/blob/main/DAY6_COMPLETE.md)
+- [Project complete — Days 1–6](Project-Complete) (wiki) — board, issues, Actions, acceptance
+- [PROJECT_COMPLETE_GITHUB.md](https://github.com/shellworlds/OPNBNK4/blob/main/docs/github/PROJECT_COMPLETE_GITHUB.md) (repo checklist)

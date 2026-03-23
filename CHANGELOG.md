@@ -2,6 +2,21 @@
 
 All notable changes to **OPNBNK4** (Digital Banking Platform) are documented here.
 
+## [1.0.2-day6-wiki] — 2026-03-23
+
+### Added
+
+- **Wiki:** [Project-Complete](docs/wiki/Project-Complete.md) — board closure, milestones, issues index, Actions table, acceptance links.
+- **GitHub docs:** [PROJECT_COMPLETE_GITHUB.md](docs/github/PROJECT_COMPLETE_GITHUB.md) — checklist for Project #6 and milestones.
+
+### Changed
+
+- **Wiki:** [GitHub-Project-Issues-Actions-Insights](docs/wiki/GitHub-Project-Issues-Actions-Insights.md) — Days 1–6 complete status; fixed Actions table (removed erroneous row); Post-deployment template under Issues; `day-5` verify noted for post–Day 6 regression.
+- **Wiki:** [Releases](docs/wiki/Releases.md) — dedicated **v1.0.1-day6** section at top.
+- **Wiki:** [Home](docs/wiki/Home.md), [_Sidebar](docs/wiki/_Sidebar.md), [Day-6-Delivery](docs/wiki/Day-6-Delivery.md) — links to project-complete hub and `SUBMISSION_DAY6`.
+- **README:** releases line includes **v1.0.1-day6**; GitHub table links wiki Project Complete, `PROJECT_COMPLETE_GITHUB`, post-deploy issue form; Actions note.
+- **Issues docs:** [DAY5_DEDICATED_ISSUES.md](docs/github/DAY5_DEDICATED_ISSUES.md), [DAY6_DEDICATED_ISSUES.md](docs/github/DAY6_DEDICATED_ISSUES.md) — completion pointers.
+
 ## [1.0.1-day6] — 2026-03-23
 
 ### Added

@@ -12,6 +12,7 @@ Welcome to the **[shellworlds/OPNBNK4](https://github.com/shellworlds/OPNBNK4)**
 | [Day 4 — Delivery](https://github.com/shellworlds/OPNBNK4/wiki/Day-4-Delivery) | E2E Playwright, observability, security scans, K8s/Helm, performance report, RC `v0.9.0` |
 | [Day 5 — Delivery](https://github.com/shellworlds/OPNBNK4/wiki/Day-5-Delivery) | UAT pack, fraud UNDER_REVIEW, docs + deliverables bundle, production tag `v1.0.0` |
 | [Day 6 — Delivery](https://github.com/shellworlds/OPNBNK4/wiki/Day-6-Delivery) | Post-deploy validation, training, compliance evidence index, acceptance templates |
+| [Project complete — Days 1–6](https://github.com/shellworlds/OPNBNK4/wiki/Project-Complete) | Board closure, milestones, issues index, Actions summary, acceptance links |
 | [GitHub: Project, Issues, Actions & Insights](https://github.com/shellworlds/OPNBNK4/wiki/GitHub-Project-Issues-Actions-Insights) | Board, milestones, CI workflows, Insights |
 | [Releases](https://github.com/shellworlds/OPNBNK4/wiki/Releases) | Tagged milestones and changelog |
 
@@ -27,6 +28,7 @@ Welcome to the **[shellworlds/OPNBNK4](https://github.com/shellworlds/OPNBNK4)**
 | **Day 4 client handoff (submission)** | [docs/submission/CLIENT_HANDOFF_DAY4.md](https://github.com/shellworlds/OPNBNK4/blob/main/docs/submission/CLIENT_HANDOFF_DAY4.md) |
 | **Day 5 client handoff (submission)** | [docs/submission/CLIENT_HANDOFF_DAY5.md](https://github.com/shellworlds/OPNBNK4/blob/main/docs/submission/CLIENT_HANDOFF_DAY5.md) |
 | **Day 6 client handoff (submission)** | [docs/submission/CLIENT_HANDOFF_DAY6.md](https://github.com/shellworlds/OPNBNK4/blob/main/docs/submission/CLIENT_HANDOFF_DAY6.md) |
+| **Submission index (Day 6)** | [SUBMISSION_DAY6.md](https://github.com/shellworlds/OPNBNK4/blob/main/SUBMISSION_DAY6.md) |
 | **Day 2 engineering notes** | [DAY2_COMPLETE.md](https://github.com/shellworlds/OPNBNK4/blob/main/DAY2_COMPLETE.md) |
 | **Day 3 engineering notes** | [DAY3_COMPLETE.md](https://github.com/shellworlds/OPNBNK4/blob/main/DAY3_COMPLETE.md) |
 | **Day 4 engineering notes** | [DAY4_COMPLETE.md](https://github.com/shellworlds/OPNBNK4/blob/main/DAY4_COMPLETE.md) |
@@ -37,6 +39,7 @@ Welcome to the **[shellworlds/OPNBNK4](https://github.com/shellworlds/OPNBNK4)**
 | **Dedicated issues (Day 4 closure + Day 5)** | [docs/github/DAY4_DEDICATED_ISSUES.md](https://github.com/shellworlds/OPNBNK4/blob/main/docs/github/DAY4_DEDICATED_ISSUES.md) |
 | **Dedicated issues (Day 5 closure)** | [docs/github/DAY5_DEDICATED_ISSUES.md](https://github.com/shellworlds/OPNBNK4/blob/main/docs/github/DAY5_DEDICATED_ISSUES.md) |
 | **Dedicated issues (Day 6)** | [docs/github/DAY6_DEDICATED_ISSUES.md](https://github.com/shellworlds/OPNBNK4/blob/main/docs/github/DAY6_DEDICATED_ISSUES.md) |
+| **Project complete (GitHub checklist)** | [docs/github/PROJECT_COMPLETE_GITHUB.md](https://github.com/shellworlds/OPNBNK4/blob/main/docs/github/PROJECT_COMPLETE_GITHUB.md) |
 | **Dedicated issues (Day 2, historical)** | [docs/github/DAY2_DEDICATED_ISSUES.md](https://github.com/shellworlds/OPNBNK4/blob/main/docs/github/DAY2_DEDICATED_ISSUES.md) |
 | **Day 1 client test report** | [docs/day1-client-test-report.md](https://github.com/shellworlds/OPNBNK4/blob/main/docs/day1-client-test-report.md) |
 | **Verification logs (bundle)** | [docs/reports/day1-verification-2026-03-23/](https://github.com/shellworlds/OPNBNK4/tree/main/docs/reports/day1-verification-2026-03-23) |
@@ -48,7 +51,7 @@ Welcome to the **[shellworlds/OPNBNK4](https://github.com/shellworlds/OPNBNK4)**
 | **Architecture** | [docs/architecture/](https://github.com/shellworlds/OPNBNK4/tree/main/docs/architecture) |
 | **Project board** | [Repository Projects](https://github.com/shellworlds/OPNBNK4/projects) · [OPNBNK4 Digital Banking Platform](https://github.com/users/shellworlds/projects/6) |
 | **Actions** | [Workflow runs](https://github.com/shellworlds/OPNBNK4/actions) |
-| **Releases (GitHub)** | [v1.0.0 (Day 5 production)](https://github.com/shellworlds/OPNBNK4/releases/tag/v1.0.0) · [v0.9.0 (Day 4 RC)](https://github.com/shellworlds/OPNBNK4/releases/tag/v0.9.0) · [v0.3.0-day3 (Day 3)](https://github.com/shellworlds/OPNBNK4/releases/tag/v0.3.0-day3) · [v0.2.0-day2](https://github.com/shellworlds/OPNBNK4/releases/tag/v0.2.0-day2) · [All releases](https://github.com/shellworlds/OPNBNK4/releases) |
+| **Releases (GitHub)** | [v1.0.1-day6 (Day 6 docs)](https://github.com/shellworlds/OPNBNK4/releases/tag/v1.0.1-day6) · [v1.0.0 (Day 5 production)](https://github.com/shellworlds/OPNBNK4/releases/tag/v1.0.0) · [v0.9.0 (Day 4 RC)](https://github.com/shellworlds/OPNBNK4/releases/tag/v0.9.0) · [v0.3.0-day3 (Day 3)](https://github.com/shellworlds/OPNBNK4/releases/tag/v0.3.0-day3) · [v0.2.0-day2](https://github.com/shellworlds/OPNBNK4/releases/tag/v0.2.0-day2) · [All releases](https://github.com/shellworlds/OPNBNK4/releases) |
 
 ## Source mirror
 

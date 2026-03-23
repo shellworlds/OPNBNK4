@@ -2,6 +2,25 @@
 
 ← [Home](Home)
 
+## v1.0.1-day6 — Day 6 post-deploy & handoff documentation
+
+- **Tag / release:** [v1.0.1-day6](https://github.com/shellworlds/OPNBNK4/releases/tag/v1.0.1-day6)
+- **Changelog:** [CHANGELOG.md](https://github.com/shellworlds/OPNBNK4/blob/main/CHANGELOG.md) — **\[1.0.1-day6\]**, **\[1.0.2-day6-wiki\]** (wiki / Project hub refresh)
+
+### Summary
+
+Post-deploy validation runbooks, alert/incident/rollback docs, training pack (slides outline, hands-on, FAQ), compliance evidence index, Postman collection, Swagger-offline and architecture-export instructions, final acceptance checklist and acceptance letter template.
+
+- **Client submission:** [docs/submission/CLIENT_HANDOFF_DAY6.md](https://github.com/shellworlds/OPNBNK4/blob/main/docs/submission/CLIENT_HANDOFF_DAY6.md)
+- **Engineering notes:** [DAY6_COMPLETE.md](https://github.com/shellworlds/OPNBNK4/blob/main/DAY6_COMPLETE.md)
+
+### Related wiki pages
+
+- [Day 6 — Delivery](Day-6-Delivery)
+- [Project complete — Days 1–6](Project-Complete)
+
+---
+
 ## v1.0.0 — Day 5 production milestone
 
 - **Tag / release:** [v1.0.0](https://github.com/shellworlds/OPNBNK4/releases/tag/v1.0.0) *(create on GitHub after merge if not present)*
@@ -19,12 +38,6 @@ UAT documentation, fraud **UNDER_REVIEW** status and PIS status propagation, UI 
 - [Day 5 — Delivery](Day-5-Delivery)
 
 ---
-
-### Day 6 documentation (2026-03-23)
-
-Post-deploy validation runbooks, training pack, compliance evidence index, Postman collection, acceptance templates — see [Day 6 — Delivery](Day-6-Delivery). Changelog: **1.0.1-day6** on `main` (documentation milestone; optional tag).
-
-
 
 ## v0.9.0 — Day 4 release candidate
 
