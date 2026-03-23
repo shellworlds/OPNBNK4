@@ -7,5 +7,5 @@ Docker: 28.2.2
 Gradle: 8.8 (per-service wrapper)
 TESTCONTAINERS_RYUK_DISABLED=true (set for Gradle test runs)
 
-Git revision (main at run time): c3e54df6b80b61d0c2f440c3aeaf202ccf2124b1
+Code tree when tests ran: c3e54df6b80b61d0c2f440c3aeaf202ccf2124b1
 Remote: https://github.com/shellworlds/OPNBNK4

@@ -4,7 +4,7 @@
 **Repository:** [github.com/shellworlds/OPNBNK4](https://github.com/shellworlds/OPNBNK4)  
 **Release tag:** [v0.1.0-day1](https://github.com/shellworlds/OPNBNK4/releases/tag/v0.1.0-day1)  
 **Report date:** 23 March 2026  
-**Git revision verified:** `c3e54df` (see artifact bundle for exact full SHA)
+**Code revision exercised in tests:** `c3e54df6b80b61d0c2f440c3aeaf202ccf2124b1` (full SHA in [`environment.txt`](reports/day1-verification-2026-03-23/environment.txt)). The log bundle itself lives on **`main`** at [`docs/reports/day1-verification-2026-03-23/`](https://github.com/shellworlds/OPNBNK4/tree/main/docs/reports/day1-verification-2026-03-23).
 
 This document summarises **what was delivered in Day 1**, **what was verified in the latest full test run**, and **where to find evidence** (files in-repo and URLs on GitHub).
 
