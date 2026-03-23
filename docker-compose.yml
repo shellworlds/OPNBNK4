@@ -133,7 +133,19 @@ services:
       GATEWAY_ACCOUNT_URI: http://account-service:8081
       GATEWAY_TRANSACTION_URI: http://transaction-service:8082
       GATEWAY_OPENBANKING_URI: http://openbanking-service:8083
-      CORS_ALLOWED_ORIGINS: http://localhost:3000
+      CORS_ALLOWED_ORIGINS: http://localhost:3000,http://localhost:3010,http://localhost:19006
+    networks:
+      - bank-net
+
+  mobile-web:
+    build:
+      context: ./frontend/mobile-app
+      args:
+        EXPO_PUBLIC_GATEWAY_URL: http://localhost:8080
+    ports:
+      - "3010:3010"
+    depends_on:
+      - api-gateway
     networks:
       - bank-net
 
