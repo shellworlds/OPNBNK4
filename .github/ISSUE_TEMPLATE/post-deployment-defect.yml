@@ -1,0 +1,41 @@
+name: Post-deployment defect
+description: Track a production or staging issue found after release
+title: "[post-deploy] "
+labels: ["bug", "day-6", "operations"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this after monitoring or client reports. Link the release tag (e.g. v1.0.0).
+  - type: dropdown
+    id: environment
+    attributes:
+      label: Environment
+      options:
+        - staging
+        - production
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      options:
+        - SEV3
+        - SEV2
+        - SEV1
+  - type: textarea
+    id: symptoms
+    attributes:
+      label: Symptoms
+      description: What users or monitors saw
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction / queries
+      description: kubectl, curl, dashboard links
+  - type: textarea
+    id: fix
+    attributes:
+      label: Fix / rollback taken
+      description: PR link, helm rollback revision, etc.

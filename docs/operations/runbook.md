@@ -93,3 +93,20 @@ Apply manifests under `infrastructure/k8s/base/` or `helm upgrade` using `infras
 - Completing a transaction when the fraud service returns **REVIEW** (e.g. EUR equivalent above the review threshold) sets status **`UNDER_REVIEW`** and emits `TRANSACTION_FRAUD_REVIEW`.  
 - **BLOCK** still returns HTTP **403**.  
 - UAT script: `docs/uat/uat-script.md`.
+
+## Post-deployment verification (Day 6)
+
+After each production or staging deploy, run:
+
+- **`docs/operations/post-deployment-validation.md`** — pods, ingress/TLS, smoke, logs, Grafana.
+- **`docs/operations/alert-validation.md`** — confirm notifications (or document not configured).
+- **`docs/operations/rollback-procedure.md`** — ensure team knows rollback commands; keep **v0.9.0** images in GHCR for emergency.
+
+## Support & escalation
+
+| Channel | Contact |
+|---------|---------|
+| Engineering / Issues | https://github.com/shellworlds/OPNBNK4/issues |
+| On-call (fill) | _phone / PagerDuty_ |
+| Client success (fill) | _email_ |
+| Security (fill) | _email_ |
