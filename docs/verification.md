@@ -12,14 +12,14 @@ The fixture file contains **IBAN-style strings commonly published as format / ch
 
 | Scope | Count | Notes |
 |-------|------:|--------|
-| `backend/account-service` | **14** | Includes **Testcontainers PostgreSQL** `AccountPostgresIntegrationTest` loading the public fixture |
-| `backend/transaction-service` | **8** | Includes **Testcontainers** `TransactionPostgresIntegrationTest` using fixture transaction rows |
+| `backend/account-service` | **15** | Includes **Testcontainers PostgreSQL** `AccountPostgresIntegrationTest` loading the public fixture |
+| `backend/transaction-service` | **7** | Includes **Testcontainers** `TransactionPostgresIntegrationTest` using fixture transaction rows |
 | `backend/openbanking-service` | **8** | Includes **Testcontainers** `OpenbankingPostgresIntegrationTest` using fixture consents |
 | `backend/api-gateway` | **3** | WireMock route IT + filter unit test + context smoke |
-| `frontend/web-portal` | **4** | React Testing Library (App, Login, Dashboard ×2) |
+| `frontend/web-portal` | **5** | React Testing Library (App, Login, Dashboard ×2, Account detail) |
 
 **Total backend JUnit test cases:** 33  
-**Frontend:** 4
+**Frontend:** 5
 
 ### Commands used
 
@@ -49,12 +49,18 @@ The script:
 2. Waits until `GET {gateway}/api/accounts` returns **200** (gateway + downstream services)
 3. Posts each account from the public fixture via the gateway
 4. Posts transactions against the **first returned account id**
-5. Posts consents from the fixture
-6. Prints a JSON summary to stdout
+5. Posts consents (customer id aligned to the first created account so AIS returns data)
+6. Optionally exercises open banking AIS with demo headers
+7. Prints a JSON summary to stdout
 
 A shell wrapper is available: `infrastructure/scripts/smoke-e2e.sh` (uses `GATEWAY` env, default `http://localhost:8080`).
 
 **Note:** On this developer machine, `docker compose up` can fail if host ports are already bound (e.g. **5432** for Postgres) or if Docker cannot recreate old containers (permission / daemon state). Free the ports or stop conflicting stacks, then re-run. **Redis and Kafka are not published to the host** by default (in-stack only) to reduce port clashes.
+
+## Day 2 — CI additions
+
+- **`java-postgres-integration`** in `ci.yml`: runs `*Postgres*IntegrationTest` in `account-service`, `transaction-service`, `openbanking-service`.
+- **`day2-verify.yml`**: manual **Day 2 verify** — full Gradle suite + Postgres IT + `npm` test/build + optional Compose smoke (workflow dispatch).
 
 ## GitHub Actions
 

@@ -28,12 +28,13 @@ See `docs/architecture/high-level-design.md` for C4-style diagrams and component
 
 | Area | Link / location |
 |------|------------------|
-| **Releases** | [v0.1.0-day1 (Day 1)](https://github.com/shellworlds/OPNBNK4/releases/tag/v0.1.0-day1) · [`CHANGELOG.md`](CHANGELOG.md) |
+| **Releases** | [v0.1.0-day1 (Day 1)](https://github.com/shellworlds/OPNBNK4/releases/tag/v0.1.0-day1) · **Day 2:** tag `v0.2.0-day2` when published · [`CHANGELOG.md`](CHANGELOG.md) |
+| **Client handoff (Day 2)** | **[docs/submission/CLIENT_HANDOFF_DAY2.md](docs/submission/CLIENT_HANDOFF_DAY2.md)** — submission-ready summary + URLs |
 | **Wiki** | **[Live wiki](https://github.com/shellworlds/OPNBNK4/wiki)** · source mirror [`docs/wiki/`](docs/wiki/) (clone `OPNBNK4.wiki.git` and push to update the wiki). |
-| **Project (board)** | From the repo: **[Projects](https://github.com/shellworlds/OPNBNK4/projects)** · board **[OPNBNK4 Digital Banking Platform](https://github.com/users/shellworlds/projects/6)** — Day 1 **Done**, backlog **Todo**. |
-| **Issues** | [shellworlds/OPNBNK4/issues](https://github.com/shellworlds/OPNBNK4/issues) · milestone **Day 1** |
-| **Actions** | [Workflow runs](https://github.com/shellworlds/OPNBNK4/actions) — `CI` on push/PR; **Day 1 verify (manual)** for on-demand test reports |
-| **Insights** | [Pulse / contributors](https://github.com/shellworlds/OPNBNK4/pulse) — activity and graphs (GitHub-managed; enable Dependabot / dependency graph in **Settings** if required) |
+| **Project (board)** | **[Projects](https://github.com/shellworlds/OPNBNK4/projects)** · **[OPNBNK4 Digital Banking Platform](https://github.com/users/shellworlds/projects/6)** — track Day 2 closure + Day 3 via [dedicated issues checklist](docs/github/DAY2_DEDICATED_ISSUES.md). |
+| **Issues** | [Issues](https://github.com/shellworlds/OPNBNK4/issues) · [New (templates)](https://github.com/shellworlds/OPNBNK4/issues/new/choose) · milestones **Day 1–3** |
+| **Actions** | [Workflow runs](https://github.com/shellworlds/OPNBNK4/actions) — **`CI`** on push/PR; **Day 1 verify** / **Day 2 verify** (manual) for full test + optional E2E |
+| **Insights** | [Pulse](https://github.com/shellworlds/OPNBNK4/pulse) — activity and graphs (enable Dependabot / dependency graph under **Settings → Code security** if the client requires it) |
 
 ## Local development
 

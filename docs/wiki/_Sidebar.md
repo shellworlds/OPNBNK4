@@ -2,6 +2,7 @@
 
 - [Home](Home)
 - [Day 1 — Delivery](Day-1-Delivery)
+- [Day 2 — Delivery](Day-2-Delivery)
 - [Project, Issues, Actions & Insights](GitHub-Project-Issues-Actions-Insights)
 - [Releases](Releases)
 

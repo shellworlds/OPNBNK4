@@ -10,11 +10,13 @@ The project is **linked to the repository**, so it appears under **[github.com/s
 
 - Use **Status** (Todo / In Progress / Done) to track delivery and backlog.
 - Link **issues** and **PRs** from `shellworlds/OPNBNK4` via the issue sidebar **Projects** or the project UI **Add item**.
+- **Day 2:** Add issues from **[docs/github/DAY2_DEDICATED_ISSUES.md](https://github.com/shellworlds/OPNBNK4/blob/main/docs/github/DAY2_DEDICATED_ISSUES.md)** (closure + Day 3 backlog). Use **Milestone** `Day 2` for acceptance items.
 
 ## Issues
 
-- **Milestones:** Use a **Day 1** milestone for client-facing closure.
-- **Labels:** `day-1`, `documentation`, `enhancement`, `bug` (created from initial setup issues).
+- **Milestones:** **Day 1** (historical), **Day 2** (closure + handoff), **Day 3** (backlog).
+- **Labels:** `day-1`, `day-2`, `day-3`, `documentation`, `enhancement`, `bug`, `security`, `testing`, `open-banking`.
+- **Templates:** Repository **[Issue templates](https://github.com/shellworlds/OPNBNK4/issues/new/choose)** — Day 2 wiki sync, Day 3 JWT/smoke, Day 3 OpenAPI (see `.github/ISSUE_TEMPLATE/`).
 
 ## Actions (CI/CD)
 
@@ -22,8 +24,9 @@ The project is **linked to the repository**, so it appears under **[github.com/s
 
 | Workflow | Purpose |
 |----------|---------|
-| **CI** (`ci.yml`) | Gradle test + bootJar; npm test + build; Docker builds; E2E smoke on `main` / PRs |
-| **Day 1 verify** (`day1-verify.yml`) | Manual **Run workflow** to re-run backend + frontend tests |
+| **CI** (`ci.yml`) | Gradle test + bootJar per service; **Postgres Testcontainers** job; npm test + build; Docker builds; E2E Compose smoke on `main` / PRs |
+| **Day 1 verify** (`day1-verify.yml`) | Manual **Run workflow** — backend + frontend tests; optional E2E |
+| **Day 2 verify** (`day2-verify.yml`) | Manual **Run workflow** — all of the above **plus** `*Postgres*IntegrationTest`; optional E2E |
 
 ## Insights
 
