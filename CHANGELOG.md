@@ -2,6 +2,23 @@
 
 All notable changes to **OPNBNK4** (Digital Banking Platform) are documented here.
 
+## [0.3.0-day3] — 2026-03-23
+
+### Added
+
+- **core-simulator**, **fraud-detection-service**, **notification-service** with Dockerfiles; Compose wiring.
+- Account-service: **CoreSimulatorClient** (Resilience4j), Redis **@Cacheable** for `getAccount`, extended **AccountResponse**.
+- Transaction-service: synchronous **fraud evaluation** before complete; **X-Device-Id** header.
+- API gateway: **circuit breaker** fallbacks, optional **channel header** validation (Docker).
+- Flyway **V2** indexes on transactions and consents; fraud **ML stub** REST; smoke script channel headers.
+- Docs: `DAY3_COMPLETE.md`, `docs/submission/CLIENT_HANDOFF_DAY3.md`, `docs/github/DAY3_DEDICATED_ISSUES.md`, `docs/security/fraud-detection.md`, `docs/operations/runbook.md`; wiki source **Day-3-Delivery**.
+- CI: Gradle matrix includes fraud, core-simulator, notification; Docker builds for those images; manual **Day 3 verify** workflow.
+- Dependabot: Gradle entries for new services; npm for **frontend/mobile-app**.
+
+### Notes
+
+- Create GitHub **Release** tag `v0.3.0-day3` when publishing to clients. WebAuthn, Vault, full observability, and GHCR remain Day 4+.
+
 ## [0.2.0-day2] — 2026-03-23
 
 ### Added

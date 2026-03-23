@@ -1,4 +1,4 @@
-name: Day 2 verify (manual)
+name: Day 3 verify (manual)
 
 on:
   workflow_dispatch:
@@ -26,7 +26,7 @@ jobs:
           java-version: "21"
           distribution: temurin
 
-      - name: Gradle tests (all services)
+      - name: Gradle tests (all backend services)
         run: |
           for s in account-service transaction-service openbanking-service api-gateway fraud-detection-service core-simulator notification-service; do
             echo "== $s =="
@@ -48,7 +48,7 @@ jobs:
           cache: npm
           cache-dependency-path: frontend/web-portal/package-lock.json
 
-      - name: npm test + build
+      - name: npm test + build (web portal)
         working-directory: frontend/web-portal
         run: |
           npm ci

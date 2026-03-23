@@ -71,4 +71,4 @@ Clone https://github.com/shellworlds/OPNBNK4.wiki.git, merge from `docs/wiki/` i
 - **Wiki:** [Day-2-Delivery](https://github.com/shellworlds/OPNBNK4/wiki/Day-2-Delivery) synced from `docs/wiki/`
 - **Dependabot:** [`.github/dependabot.yml`](https://github.com/shellworlds/OPNBNK4/blob/main/.github/dependabot.yml) · [Insights doc](https://github.com/shellworlds/OPNBNK4/blob/main/docs/github/INSIGHTS_DEPENDABOT.md)
 
-Next steps: see DAY2_COMPLETE.md (Day 3 focus).
+Next steps: **Day 3 handoff** — [docs/submission/CLIENT_HANDOFF_DAY3.md](https://github.com/shellworlds/OPNBNK4/blob/main/docs/submission/CLIENT_HANDOFF_DAY3.md) · [DAY3_COMPLETE.md](https://github.com/shellworlds/OPNBNK4/blob/main/DAY3_COMPLETE.md).

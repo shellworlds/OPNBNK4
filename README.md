@@ -28,12 +28,13 @@ See `docs/architecture/high-level-design.md` for C4-style diagrams and component
 
 | Area | Link / location |
 |------|------------------|
-| **Releases** | [v0.1.0-day1 (Day 1)](https://github.com/shellworlds/OPNBNK4/releases/tag/v0.1.0-day1) · [v0.2.0-day2 (Day 2)](https://github.com/shellworlds/OPNBNK4/releases/tag/v0.2.0-day2) · [`CHANGELOG.md`](CHANGELOG.md) |
-| **Client handoff (Day 2)** | **[docs/submission/CLIENT_HANDOFF_DAY2.md](docs/submission/CLIENT_HANDOFF_DAY2.md)** — submission-ready summary + URLs |
+| **Releases** | [v0.3.0-day3 (Day 3)](https://github.com/shellworlds/OPNBNK4/releases/tag/v0.3.0-day3) · [v0.2.0-day2](https://github.com/shellworlds/OPNBNK4/releases/tag/v0.2.0-day2) · [v0.1.0-day1](https://github.com/shellworlds/OPNBNK4/releases/tag/v0.1.0-day1) · [`CHANGELOG.md`](CHANGELOG.md) |
+| **Client handoff (Day 3)** | **[docs/submission/CLIENT_HANDOFF_DAY3.md](docs/submission/CLIENT_HANDOFF_DAY3.md)** — **current** submission summary + URLs |
+| **Client handoff (Day 2)** | [docs/submission/CLIENT_HANDOFF_DAY2.md](docs/submission/CLIENT_HANDOFF_DAY2.md) |
 | **Wiki** | **[Live wiki](https://github.com/shellworlds/OPNBNK4/wiki)** · source mirror [`docs/wiki/`](docs/wiki/) (clone `OPNBNK4.wiki.git` and push to update the wiki). |
-| **Project (board)** | **[Projects](https://github.com/shellworlds/OPNBNK4/projects)** · **[OPNBNK4 Digital Banking Platform](https://github.com/users/shellworlds/projects/6)** — track Day 2 closure + Day 3 via [dedicated issues checklist](docs/github/DAY2_DEDICATED_ISSUES.md). |
-| **Issues** | [Issues](https://github.com/shellworlds/OPNBNK4/issues) · [New (templates)](https://github.com/shellworlds/OPNBNK4/issues/new/choose) · milestones **Day 1–3** |
-| **Actions** | [Workflow runs](https://github.com/shellworlds/OPNBNK4/actions) — **`CI`** on push/PR; **Day 1 verify** / **Day 2 verify** (manual) for full test + optional E2E |
+| **Project (board)** | **[Projects](https://github.com/shellworlds/OPNBNK4/projects)** · **[OPNBNK4 Digital Banking Platform](https://github.com/users/shellworlds/projects/6)** — Day 3/4 via [DAY3_DEDICATED_ISSUES.md](docs/github/DAY3_DEDICATED_ISSUES.md) |
+| **Issues** | [Issues](https://github.com/shellworlds/OPNBNK4/issues) · [New (templates)](https://github.com/shellworlds/OPNBNK4/issues/new/choose) · milestones **Day 1–4** |
+| **Actions** | [Workflow runs](https://github.com/shellworlds/OPNBNK4/actions) — **`CI`** on push/PR; **Day 1/2/3 verify** (manual) for full tests + optional E2E |
 | **Insights** | [Pulse](https://github.com/shellworlds/OPNBNK4/pulse) — activity and graphs (enable Dependabot / dependency graph under **Settings → Code security** if the client requires it) |
 
 ## Local development

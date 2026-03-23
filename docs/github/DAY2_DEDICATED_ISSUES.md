@@ -1,5 +1,7 @@
 # Dedicated GitHub issues — Day 2 closure & Day 3 backlog
 
+**Update:** Day 3 closure and Day 4 backlog live in **[DAY3_DEDICATED_ISSUES.md](./DAY3_DEDICATED_ISSUES.md)**. Use this file for historical Day 2 context only.
+
 Use this list to create **Issues** at [github.com/shellworlds/OPNBNK4/issues](https://github.com/shellworlds/OPNBNK4/issues). Link each to the **Project** board ([Projects](https://github.com/shellworlds/OPNBNK4/projects) / [board #6](https://github.com/users/shellworlds/projects/6)) and set **Milestone** `Day 2` (closed items) or `Day 3` (open backlog).
 
 Suggested **labels:** `day-2`, `day-3`, `documentation`, `enhancement`, `security`, `testing`, `open-banking`.

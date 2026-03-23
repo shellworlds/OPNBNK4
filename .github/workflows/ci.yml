@@ -17,6 +17,9 @@ jobs:
           - transaction-service
           - openbanking-service
           - api-gateway
+          - fraud-detection-service
+          - core-simulator
+          - notification-service
     steps:
       - uses: actions/checkout@v4
 
@@ -93,6 +96,9 @@ jobs:
           docker build -t dbp-transaction:ci ./backend/transaction-service
           docker build -t dbp-openbanking:ci ./backend/openbanking-service
           docker build -t dbp-gateway:ci ./backend/api-gateway
+          docker build -t dbp-core:ci ./backend/core-simulator
+          docker build -t dbp-fraud:ci ./backend/fraud-detection-service
+          docker build -t dbp-notify:ci ./backend/notification-service
           docker build -t dbp-web:ci ./frontend/web-portal
 
   e2e-open-data-smoke:

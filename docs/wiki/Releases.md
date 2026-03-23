@@ -2,6 +2,24 @@
 
 ← [Home](Home)
 
+## v0.3.0-day3 — Day 3 milestone
+
+- **Tag / release:** [v0.3.0-day3](https://github.com/shellworlds/OPNBNK4/releases/tag/v0.3.0-day3) *(create on GitHub after merge if not present)*
+- **Changelog:** [CHANGELOG.md](https://github.com/shellworlds/OPNBNK4/blob/main/CHANGELOG.md) on `main`
+
+### Summary
+
+Core simulator + account enrichment and Redis cache, fraud-detection + sync check on complete, notification Kafka stub, gateway circuit breakers and channel validation (Docker), Flyway indexes, expanded CI and Dependabot, wiki + dedicated issues for Day 4.
+
+- **Client submission:** [docs/submission/CLIENT_HANDOFF_DAY3.md](https://github.com/shellworlds/OPNBNK4/blob/main/docs/submission/CLIENT_HANDOFF_DAY3.md)
+- **Engineering notes:** [DAY3_COMPLETE.md](https://github.com/shellworlds/OPNBNK4/blob/main/DAY3_COMPLETE.md)
+
+### Related wiki pages
+
+- [Day 3 — Delivery](Day-3-Delivery)
+
+---
+
 ## v0.2.0-day2 — Day 2 milestone
 
 - **Tag / release:** [v0.2.0-day2](https://github.com/shellworlds/OPNBNK4/releases/tag/v0.2.0-day2)

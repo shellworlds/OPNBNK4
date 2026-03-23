@@ -1,5 +1,9 @@
 # Day 3 completion summary
 
+**Client submission (share with stakeholders):** [docs/submission/CLIENT_HANDOFF_DAY3.md](docs/submission/CLIENT_HANDOFF_DAY3.md) — canonical URL: https://github.com/shellworlds/OPNBNK4/blob/main/docs/submission/CLIENT_HANDOFF_DAY3.md
+
+**GitHub issues checklist:** [docs/github/DAY3_DEDICATED_ISSUES.md](docs/github/DAY3_DEDICATED_ISSUES.md)
+
 ## Delivered in this increment
 
 - **Transaction ↔ fraud**: Synchronous `FraudEvaluationClient` before completion; `FRAUD_EVALUATION_ENABLED` / `FRAUD_EVALUATION_BASE_URL`; optional `X-Device-Id` header.

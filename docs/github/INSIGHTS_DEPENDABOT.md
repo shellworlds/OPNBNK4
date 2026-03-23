@@ -3,8 +3,8 @@
 ## Enabled in repository (as of Day 2 wrap-up)
 
 - **Dependabot version updates** are configured in [`.github/dependabot.yml`](https://github.com/shellworlds/OPNBNK4/blob/main/.github/dependabot.yml) for:
-  - Gradle (`account-service`, `transaction-service`, `openbanking-service`, `api-gateway`)
-  - npm (`frontend/web-portal`)
+  - Gradle (`account-service`, `transaction-service`, `openbanking-service`, `api-gateway`, `fraud-detection-service`, `core-simulator`, `notification-service`)
+  - npm (`frontend/web-portal`, `frontend/mobile-app`)
   - GitHub Actions workflows
 
 After merge to `default`, Dependabot opens **pull requests** for compatible updates. Review under **Pull requests** and the **Dependency graph** tab.

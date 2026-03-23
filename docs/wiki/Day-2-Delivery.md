@@ -18,7 +18,7 @@
 
 ## Out of scope / follow-ups (Day 3+)
 
-JWT required on all core APIs in Compose (smoke today is unauthenticated on those paths), full Kafka+Keycloak Testcontainers matrix, published OpenAPI artifacts, Dependabot enablement — see [DAY2_COMPLETE.md](https://github.com/shellworlds/OPNBNK4/blob/main/DAY2_COMPLETE.md) and [DAY2_DEDICATED_ISSUES.md](https://github.com/shellworlds/OPNBNK4/blob/main/docs/github/DAY2_DEDICATED_ISSUES.md).
+Much of the former Day 3 backlog shipped in **[Day 3 — Delivery](Day-3-Delivery)**. Remaining items: [DAY3_COMPLETE.md](https://github.com/shellworlds/OPNBNK4/blob/main/DAY3_COMPLETE.md) and [DAY3_DEDICATED_ISSUES.md](https://github.com/shellworlds/OPNBNK4/blob/main/docs/github/DAY3_DEDICATED_ISSUES.md).
 
 ## References (repo)
 
