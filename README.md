@@ -30,7 +30,7 @@ See `docs/architecture/high-level-design.md` for C4-style diagrams and component
 |------|------------------|
 | **Releases** | [v0.1.0-day1 (Day 1)](https://github.com/shellworlds/OPNBNK4/releases/tag/v0.1.0-day1) · [`CHANGELOG.md`](CHANGELOG.md) |
 | **Wiki** | **[Live wiki](https://github.com/shellworlds/OPNBNK4/wiki)** · source mirror [`docs/wiki/`](docs/wiki/) (clone `OPNBNK4.wiki.git` and push to update the wiki). |
-| **Project (board)** | [OPNBNK4 Digital Banking Platform](https://github.com/users/shellworlds/projects/6) — Day 1 items **Done**, backlog **Todo**. |
+| **Project (board)** | From the repo: **[Projects](https://github.com/shellworlds/OPNBNK4/projects)** · board **[OPNBNK4 Digital Banking Platform](https://github.com/users/shellworlds/projects/6)** — Day 1 **Done**, backlog **Todo**. |
 | **Issues** | [shellworlds/OPNBNK4/issues](https://github.com/shellworlds/OPNBNK4/issues) · milestone **Day 1** |
 | **Actions** | [Workflow runs](https://github.com/shellworlds/OPNBNK4/actions) — `CI` on push/PR; **Day 1 verify (manual)** for on-demand test reports |
 | **Insights** | [Pulse / contributors](https://github.com/shellworlds/OPNBNK4/pulse) — activity and graphs (GitHub-managed; enable Dependabot / dependency graph in **Settings** if required) |

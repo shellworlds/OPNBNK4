@@ -4,7 +4,9 @@
 
 ## Project board
 
-**[OPNBNK4 Digital Banking Platform](https://github.com/users/shellworlds/projects/6)** (user-scoped Project v2)
+The project is **linked to the repository**, so it appears under **[github.com/shellworlds/OPNBNK4/projects](https://github.com/shellworlds/OPNBNK4/projects)**.
+
+**[OPNBNK4 Digital Banking Platform](https://github.com/users/shellworlds/projects/6)** (Project v2; same board as above)
 
 - Use **Status** (Todo / In Progress / Done) to track delivery and backlog.
 - Link **issues** and **PRs** from `shellworlds/OPNBNK4` via the issue sidebar **Projects** or the project UI **Add item**.
