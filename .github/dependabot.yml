@@ -1,0 +1,27 @@
+# Enables Dependabot version updates (shows under Insights → Dependency graph; opens PRs).
+version: 2
+updates:
+  - package-ecosystem: "gradle"
+    directory: "/backend/account-service"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "gradle"
+    directory: "/backend/transaction-service"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "gradle"
+    directory: "/backend/openbanking-service"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "gradle"
+    directory: "/backend/api-gateway"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "npm"
+    directory: "/frontend/web-portal"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
