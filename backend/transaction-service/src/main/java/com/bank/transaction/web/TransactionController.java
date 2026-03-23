@@ -1,40 +1,41 @@
 package com.bank.transaction.web;
 
-import java.time.Instant;
+import com.bank.transaction.service.LedgerTransactionService;
+import com.bank.transaction.web.dto.CreateTransactionRequest;
+import com.bank.transaction.web.dto.TransactionResponse;
+import jakarta.validation.Valid;
 import java.util.List;
-import java.util.Map;
+import java.util.UUID;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/transactions")
 public class TransactionController {
 
+    private final LedgerTransactionService transactionService;
+
+    public TransactionController(LedgerTransactionService transactionService) {
+        this.transactionService = transactionService;
+    }
+
     @GetMapping
-    public List<Map<String, Object>> listTransactions() {
-        return List.of(
-                Map.of(
-                        "id",
-                        "txn-1001",
-                        "accountId",
-                        "acc-001",
-                        "amount",
-                        -45.99,
-                        "currency",
-                        "GBP",
-                        "bookedAt",
-                        Instant.parse("2026-03-22T10:15:30Z")),
-                Map.of(
-                        "id",
-                        "txn-1002",
-                        "accountId",
-                        "acc-001",
-                        "amount",
-                        1200.00,
-                        "currency",
-                        "GBP",
-                        "bookedAt",
-                        Instant.parse("2026-03-21T09:00:00Z")));
+    public List<TransactionResponse> listTransactions(@RequestParam(required = false) UUID accountId) {
+        if (accountId != null) {
+            return transactionService.listForAccount(accountId);
+        }
+        return transactionService.listAll();
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public TransactionResponse create(@Valid @RequestBody CreateTransactionRequest request) {
+        return transactionService.create(request);
     }
 }

@@ -1,0 +1,17 @@
+# Overrides main gateway routes during tests; WireMock listens on 8765.
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: account-service
+          uri: http://127.0.0.1:8765
+          predicates:
+            - Path=/api/accounts/**
+        - id: transaction-service
+          uri: http://127.0.0.1:8765
+          predicates:
+            - Path=/api/transactions/**
+        - id: openbanking-service
+          uri: http://127.0.0.1:8765
+          predicates:
+            - Path=/api/openbanking/**

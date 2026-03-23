@@ -1,6 +1,6 @@
 # Digital Banking Platform
 
-Microservices-based digital banking with open banking (PSD2-style) and omni-channel delivery (web, mobile APIs). This repository is the **Day 1** foundation: structure, skeleton services, local Docker Compose, and CI.
+Microservices-based digital banking with open banking (PSD2-style) and omni-channel delivery (web, mobile APIs). The repo includes **working JPA-backed APIs** for accounts, ledger transactions, and open-banking consents, **Spring Cloud Gateway** with tests, a **React** web portal, Docker Compose, CI, and **automated tests** across services and the UI.
 
 ## 7-day roadmap (high level)
 
@@ -47,6 +47,22 @@ docker compose up --build
 - **Kafka**: `localhost:9092` (internal listener for services on Docker network)
 
 Backend services use the `docker` Spring profile when started via Compose.
+
+### Tests
+
+```bash
+# Each Java service
+for d in backend/account-service backend/transaction-service backend/openbanking-service backend/api-gateway; do
+  (cd "$d" && ./gradlew test)
+done
+
+# Web portal
+cd frontend/web-portal && npm test -- --watchAll=false
+```
+
+- **account / transaction / openbanking**: JPA slice tests (`@DataJpaTest`), service unit tests (Mockito), MVC tests (`@WebMvcTest`), plus full-stack **`AccountFullStackIntegrationTest`** against H2.
+- **api-gateway**: `RequestLoggingGlobalFilter` unit test and **WireMock**-backed route proxy test (`src/test/resources/application.yml` points routes at `127.0.0.1:8765`).
+- **web-portal**: React Testing Library tests for login navigation and dashboard fetch/error handling.
 
 ### Git identity (local)
 
