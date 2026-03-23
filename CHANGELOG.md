@@ -2,6 +2,25 @@
 
 All notable changes to **OPNBNK4** (Digital Banking Platform) are documented here.
 
+## [0.9.0-day4] — 2026-03-23
+
+### Added
+
+- **E2E:** Playwright suite under `tests/e2e` (API + optional web smoke); **CI** runs `npm run test:api` after Compose smoke; `package-lock.json` for reproducible installs.
+- **Observability:** Prometheus, Grafana (port 3001), Jaeger, MailHog in `docker-compose.yml`; `micrometer-registry-prometheus` exposure documented in runbook; sample `alertmanager-sample.yml`.
+- **Performance:** `docs/performance/report.md`; JMeter results directory `infrastructure/scripts/results/` (gitkept).
+- **Security:** OWASP Dependency-Check Gradle plugin on all Java services; `infrastructure/scripts/run-dependency-check-all.sh`; `security-scan.yml` (Trivy FS + image); `docs/security/penetration-test.md`.
+- **Operations:** `docs/operations/secrets-rotation.md`, `disaster-recovery.md`; runbook sections for observability, E2E, JMeter, K8s.
+- **Architecture:** `docs/architecture/decision-log.md`; HLD Day 4 sequence diagrams.
+- **GDPR stubs:** `UserDataController` on account-service (`/api/user/export`, `/api/user/delete-request`).
+- **Notifications:** Mail send path in `NotificationListeners` when `notification.email.enabled=true`; `application-docker.yml` mail + flag mapping.
+- **Deployment:** `infrastructure/k8s/base/` manifests, `infrastructure/helm/opnbnk4/`, Terraform `variables.tf` + commented `aks.tf`, `.github/workflows/deploy-aks.yml` (GHCR push on tags; Helm job disabled until Azure).
+- **CI:** `day4-verify.yml`, `sonar-quality.yml` stub; wiki **Day-4-Delivery**; `DAY4_COMPLETE.md`, `SUBMISSION_DAY4.md`, `CLIENT_HANDOFF_DAY4.md`, `VERIFICATION_RESULTS_DAY4.md`, `docs/github/DAY4_DEDICATED_ISSUES.md`.
+
+### Notes
+
+- Formal **p99 / 99.99%** SLAs require staging cluster benchmarks (see performance report). Enable **production** environment + Helm job when Azure credentials exist. **Sonar** job remains off until tokens are set.
+
 ## [0.3.0-day3] — 2026-03-23
 
 ### Added

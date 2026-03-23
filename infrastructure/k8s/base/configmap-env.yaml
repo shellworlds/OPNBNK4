@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: opnbnk4-env
+  namespace: opnbnk4
+data:
+  SPRING_PROFILES_ACTIVE: "k8s"
+  GATEWAY_ACCOUNT_URI: "http://account-service:8081"
+  GATEWAY_TRANSACTION_URI: "http://transaction-service:8082"
+  GATEWAY_OPENBANKING_URI: "http://openbanking-service:8083"
+  SPRING_DATA_REDIS_HOST: "redis"
+  SPRING_KAFKA_BOOTSTRAP_SERVERS: "kafka:9092"

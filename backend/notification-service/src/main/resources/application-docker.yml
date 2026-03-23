@@ -4,3 +4,16 @@ spring:
       on-profile: docker
   kafka:
     bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:kafka:29092}
+  mail:
+    host: ${SPRING_MAIL_HOST:localhost}
+    port: ${SPRING_MAIL_PORT:1025}
+    properties:
+      mail:
+        smtp:
+          auth: "false"
+          starttls:
+            enable: "false"
+
+notification:
+  email:
+    enabled: ${NOTIFICATION_EMAIL_ENABLED:false}

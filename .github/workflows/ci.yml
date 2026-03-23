@@ -115,6 +115,21 @@ jobs:
         run: |
           python3 infrastructure/scripts/smoke-e2e.py --gateway http://localhost:8080
 
+      - name: Set up Node.js (Playwright API E2E)
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Playwright API E2E
+        working-directory: tests/e2e
+        env:
+          E2E_GATEWAY_URL: http://localhost:8080
+          SKIP_WEB_E2E: "true"
+        run: |
+          npm ci
+          npx playwright install --with-deps
+          npm run test:api
+
       - name: Tear down
         if: always()
         run: docker compose down -v --remove-orphans

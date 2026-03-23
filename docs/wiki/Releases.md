@@ -2,6 +2,24 @@
 
 ← [Home](Home)
 
+## v0.9.0 — Day 4 release candidate
+
+- **Tag / release:** [v0.9.0](https://github.com/shellworlds/OPNBNK4/releases/tag/v0.9.0) *(create on GitHub after merge if not present)*
+- **Changelog:** [CHANGELOG.md](https://github.com/shellworlds/OPNBNK4/blob/main/CHANGELOG.md) on `main`
+
+### Summary
+
+Playwright API E2E in CI, Prometheus/Grafana/Jaeger/MailHog in Compose, JMeter assets + performance report, OWASP Dependency-Check + Trivy workflows, Kubernetes/Helm/Terraform scaffolding, GHCR deploy workflow on tags, GDPR export/delete-request stubs, notification email to MailHog, Day 4 documentation and wiki.
+
+- **Client submission:** [docs/submission/CLIENT_HANDOFF_DAY4.md](https://github.com/shellworlds/OPNBNK4/blob/main/docs/submission/CLIENT_HANDOFF_DAY4.md)
+- **Engineering notes:** [DAY4_COMPLETE.md](https://github.com/shellworlds/OPNBNK4/blob/main/DAY4_COMPLETE.md)
+
+### Related wiki pages
+
+- [Day 4 — Delivery](Day-4-Delivery)
+
+---
+
 ## v0.3.0-day3 — Day 3 milestone
 
 - **Tag / release:** [v0.3.0-day3](https://github.com/shellworlds/OPNBNK4/releases/tag/v0.3.0-day3) *(create on GitHub after merge if not present)*

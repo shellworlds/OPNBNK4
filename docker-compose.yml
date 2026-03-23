@@ -96,9 +96,14 @@ services:
     depends_on:
       kafka:
         condition: service_started
+      mailhog:
+        condition: service_started
     environment:
       SPRING_PROFILES_ACTIVE: docker
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:29092
+      SPRING_MAIL_HOST: mailhog
+      SPRING_MAIL_PORT: "1025"
+      NOTIFICATION_EMAIL_ENABLED: "true"
     networks:
       - bank-net
 
@@ -211,6 +216,50 @@ services:
     depends_on:
       - api-gateway
       - keycloak
+    networks:
+      - bank-net
+
+  mailhog:
+    image: mailhog/mailhog:v1.0.1
+    ports:
+      - "8025:8025"
+      - "1025:1025"
+    networks:
+      - bank-net
+
+  prometheus:
+    image: prom/prometheus:v2.53.0
+    volumes:
+      - ./infrastructure/observability/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+    ports:
+      - "9090:9090"
+    depends_on:
+      - api-gateway
+    networks:
+      - bank-net
+
+  grafana:
+    image: grafana/grafana:11.1.0
+    ports:
+      - "3001:3000"
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: admin
+      GF_USERS_ALLOW_SIGN_UP: "false"
+    volumes:
+      - ./infrastructure/observability/grafana/provisioning:/etc/grafana/provisioning:ro
+    depends_on:
+      - prometheus
+    networks:
+      - bank-net
+
+  jaeger:
+    image: jaegertracing/all-in-one:1.57
+    ports:
+      - "16686:16686"
+      - "4317:4317"
+      - "4318:4318"
     networks:
       - bank-net
 

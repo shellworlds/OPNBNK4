@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: account-service
+  namespace: opnbnk4
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: account-service
+  template:
+    metadata:
+      labels:
+        app: account-service
+    spec:
+      containers:
+        - name: account-service
+          image: ghcr.io/shellworlds/opnbnk4-account-service:v0.9.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8081
+          envFrom:
+            - configMapRef:
+                name: opnbnk4-env
+          env:
+            - name: SPRING_DATASOURCE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: opnbnk4-db
+                  key: url
+            - name: SPRING_DATASOURCE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: opnbnk4-db
+                  key: username
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: opnbnk4-db
+                  key: password
+          resources:
+            requests:
+              cpu: "250m"
+              memory: "768Mi"
+            limits:
+              cpu: "2"
+              memory: "1536Mi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: account-service
+  namespace: opnbnk4
+spec:
+  selector:
+    app: account-service
+  ports:
+    - port: 8081
+      targetPort: 8081

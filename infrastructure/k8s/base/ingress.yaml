@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: opnbnk4-gateway
+  namespace: opnbnk4
+  annotations:
+    kubernetes.io/ingress.class: azure/application-gateway
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  tls:
+    - hosts:
+        - banking.example.com
+      secretName: opnbnk4-tls
+  rules:
+    - host: banking.example.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: api-gateway
+                port:
+                  number: 8080

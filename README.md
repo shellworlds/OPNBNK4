@@ -28,14 +28,16 @@ See `docs/architecture/high-level-design.md` for C4-style diagrams and component
 
 | Area | Link / location |
 |------|------------------|
-| **Releases** | [v0.3.0-day3 (Day 3)](https://github.com/shellworlds/OPNBNK4/releases/tag/v0.3.0-day3) · [v0.2.0-day2](https://github.com/shellworlds/OPNBNK4/releases/tag/v0.2.0-day2) · [v0.1.0-day1](https://github.com/shellworlds/OPNBNK4/releases/tag/v0.1.0-day1) · [`CHANGELOG.md`](CHANGELOG.md) |
-| **Client handoff (Day 3)** | **[docs/submission/CLIENT_HANDOFF_DAY3.md](docs/submission/CLIENT_HANDOFF_DAY3.md)** — **current** submission summary + URLs |
-| **Submission index** | [SUBMISSION_DAY3.md](SUBMISSION_DAY3.md) · [Verification results](docs/submission/VERIFICATION_RESULTS_DAY3.md) |
+| **Releases** | [v0.9.0 (Day 4 RC)](https://github.com/shellworlds/OPNBNK4/releases/tag/v0.9.0) · [v0.3.0-day3 (Day 3)](https://github.com/shellworlds/OPNBNK4/releases/tag/v0.3.0-day3) · [v0.2.0-day2](https://github.com/shellworlds/OPNBNK4/releases/tag/v0.2.0-day2) · [v0.1.0-day1](https://github.com/shellworlds/OPNBNK4/releases/tag/v0.1.0-day1) · [`CHANGELOG.md`](CHANGELOG.md) |
+| **Client handoff (Day 4)** | **[docs/submission/CLIENT_HANDOFF_DAY4.md](docs/submission/CLIENT_HANDOFF_DAY4.md)** — **current** submission summary + URLs |
+| **Submission index** | [SUBMISSION_DAY4.md](SUBMISSION_DAY4.md) · [Verification results (Day 4)](docs/submission/VERIFICATION_RESULTS_DAY4.md) |
+| **Client handoff (Day 3)** | [docs/submission/CLIENT_HANDOFF_DAY3.md](docs/submission/CLIENT_HANDOFF_DAY3.md) |
+| **Submission index (Day 3)** | [SUBMISSION_DAY3.md](SUBMISSION_DAY3.md) · [Verification results](docs/submission/VERIFICATION_RESULTS_DAY3.md) |
 | **Client handoff (Day 2)** | [docs/submission/CLIENT_HANDOFF_DAY2.md](docs/submission/CLIENT_HANDOFF_DAY2.md) |
 | **Wiki** | **[Live wiki](https://github.com/shellworlds/OPNBNK4/wiki)** · source mirror [`docs/wiki/`](docs/wiki/) (clone `OPNBNK4.wiki.git` and push to update the wiki). |
-| **Project (board)** | **[Projects](https://github.com/shellworlds/OPNBNK4/projects)** · **[OPNBNK4 Digital Banking Platform](https://github.com/users/shellworlds/projects/6)** — Day 3/4 via [DAY3_DEDICATED_ISSUES.md](docs/github/DAY3_DEDICATED_ISSUES.md) |
-| **Issues** | [Issues](https://github.com/shellworlds/OPNBNK4/issues) · [New (templates)](https://github.com/shellworlds/OPNBNK4/issues/new/choose) · milestones **Day 1–4** |
-| **Actions** | [Workflow runs](https://github.com/shellworlds/OPNBNK4/actions) — **`CI`** on push/PR; **Day 1/2/3 verify** (manual) for full tests + optional E2E |
+| **Project (board)** | **[Projects](https://github.com/shellworlds/OPNBNK4/projects)** · **[OPNBNK4 Digital Banking Platform](https://github.com/users/shellworlds/projects/6)** — [DAY4_DEDICATED_ISSUES.md](docs/github/DAY4_DEDICATED_ISSUES.md) · [DAY3_DEDICATED_ISSUES.md](docs/github/DAY3_DEDICATED_ISSUES.md) |
+| **Issues** | [Issues](https://github.com/shellworlds/OPNBNK4/issues) · [New (templates)](https://github.com/shellworlds/OPNBNK4/issues/new/choose) · milestones **Day 1–5** |
+| **Actions** | [Workflow runs](https://github.com/shellworlds/OPNBNK4/actions) — **`CI`** (incl. Playwright API E2E); **Day 1/2/3/4 verify** (manual); **Security scan**; **Deploy AKS (tag)** |
 | **Insights** | [Pulse](https://github.com/shellworlds/OPNBNK4/pulse) — activity and graphs (enable Dependabot / dependency graph under **Settings → Code security** if the client requires it) |
 
 ## Local development

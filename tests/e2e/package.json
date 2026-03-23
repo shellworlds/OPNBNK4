@@ -1,0 +1,14 @@
+{
+  "name": "opnbnk4-e2e",
+  "private": true,
+  "version": "0.0.1",
+  "scripts": {
+    "test": "playwright test",
+    "test:api": "playwright test api",
+    "test:web": "playwright test web",
+    "report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.0"
+  }
+}

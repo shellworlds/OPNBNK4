@@ -1,0 +1,21 @@
+name: SonarCloud (optional)
+
+# Enable when SONAR_TOKEN and SONAR_ORGANIZATION are set in repository secrets.
+# Uncomment `on` and the sonar job body, or use SonarQube self-hosted scanner.
+
+on:
+  workflow_dispatch:
+
+jobs:
+  sonar:
+    if: false
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

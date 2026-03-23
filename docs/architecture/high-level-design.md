@@ -104,3 +104,56 @@ flowchart LR
 - **Fraud**: `transaction-service` calls `fraud-detection-service` synchronously before completing a transaction; Kafka listeners still process `TransactionCreated` for async scoring. Amount and device fingerprint rules apply; `BLOCK` returns HTTP 403.
 - **Caching**: Account reads use Spring Cache with Redis (60s TTL) in Docker; balance updates evict the cache entry.
 - **Gateway resilience**: Resilience4j circuit breakers on routed services with JSON fallback payloads from `/fallback/*`.
+
+## Day 4 — E2E, observability, and deployment paths
+
+### Sequence: payment initiation (PIS) via gateway
+
+```mermaid
+sequenceDiagram
+  participant TPP as TPP / client
+  participant GW as API Gateway
+  participant OB as openbanking-service
+  participant TX as transaction-service
+  participant FR as fraud-detection-service
+  participant K as Kafka
+
+  TPP->>GW: POST /openbanking/payments (headers + body)
+  GW->>OB: route PIS
+  OB->>TX: create / complete payment
+  TX->>FR: evaluate (sync)
+  FR-->>TX: ALLOW / BLOCK
+  TX->>K: publish domain events
+  TX-->>OB: result
+  OB-->>GW: response
+  GW-->>TPP: 201 / 403
+```
+
+### Sequence: account read with cache
+
+```mermaid
+sequenceDiagram
+  participant C as Client
+  participant GW as API Gateway
+  participant AC as account-service
+  participant R as Redis
+  participant CS as core-simulator
+
+  C->>GW: GET /api/accounts/{id}
+  GW->>AC: forward (channel headers)
+  AC->>R: cache get
+  alt cache miss
+    R-->>AC: miss
+    AC->>CS: enrich (optional)
+    CS-->>AC: core fields
+    AC->>R: cache put
+  else cache hit
+    R-->>AC: cached DTO
+  end
+  AC-->>GW: 200 JSON
+  GW-->>C: 200 JSON
+```
+
+### Trace propagation (target state)
+
+HTTP **W3C traceparent** and OTLP exporters should align across **gateway to services to JDBC/Kafka**. Validate in **Jaeger** at `http://localhost:16686` after enabling OTLP endpoints on each JVM (incremental rollout Day 5 to 7).

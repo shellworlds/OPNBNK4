@@ -1,0 +1,17 @@
+gateway:
+  image:
+    repository: ghcr.io/shellworlds/opnbnk4-api-gateway
+    tag: v0.9.0
+  replicas: 2
+  resources:
+    requests:
+      cpu: 250m
+      memory: 512Mi
+    limits:
+      cpu: "1"
+      memory: 1Gi
+
+ingress:
+  enabled: true
+  host: banking.example.com
+  className: azure/application-gateway

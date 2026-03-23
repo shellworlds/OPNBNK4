@@ -1,0 +1,84 @@
+name: Deploy AKS (tag)
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: read
+  packages: write
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_PREFIX: shellworlds/opnbnk4
+
+jobs:
+  build-push:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - context: ./backend
+            file: ./backend/account-service/Dockerfile
+            image: account-service
+          - context: ./backend
+            file: ./backend/transaction-service/Dockerfile
+            image: transaction-service
+          - context: ./backend/openbanking-service
+            file: ./backend/openbanking-service/Dockerfile
+            image: openbanking-service
+          - context: ./backend/api-gateway
+            file: ./backend/api-gateway/Dockerfile
+            image: api-gateway
+          - context: ./backend
+            file: ./backend/fraud-detection-service/Dockerfile
+            image: fraud-detection-service
+          - context: ./backend
+            file: ./backend/notification-service/Dockerfile
+            image: notification-service
+          - context: ./backend/core-simulator
+            file: ./backend/core-simulator/Dockerfile
+            image: core-simulator
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract tag
+        id: tag
+        run: echo "version=${GITHUB_REF#refs/tags/}" >> "$GITHUB_OUTPUT"
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: ${{ matrix.context }}
+          file: ${{ matrix.file }}
+          push: true
+          tags: |
+            ${{ env.REGISTRY }}/${{ env.IMAGE_PREFIX }}-${{ matrix.image }}:${{ steps.tag.outputs.version }}
+            ${{ env.REGISTRY }}/${{ env.IMAGE_PREFIX }}-${{ matrix.image }}:latest
+
+  helm-upgrade:
+    runs-on: ubuntu-latest
+    needs: [build-push]
+    environment: production
+    if: false
+    steps:
+      - uses: actions/checkout@v4
+      - name: Azure login
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: Get AKS credentials
+        run: az aks get-credentials --resource-group "${{ secrets.AKS_RG }}" --name "${{ secrets.AKS_NAME }}"
+      - name: Helm upgrade
+        run: |
+          helm upgrade --install opnbnk4 ./infrastructure/helm/opnbnk4 \
+            --namespace opnbnk4 --create-namespace \
+            --set gateway.image.tag=${GITHUB_REF#refs/tags/}
