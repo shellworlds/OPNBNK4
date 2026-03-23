@@ -6,8 +6,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.bank.account.domain.AccountType;
 import com.bank.account.web.dto.CreateAccountRequest;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.math.BigDecimal;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +29,9 @@ class AccountFullStackIntegrationTest {
     private ObjectMapper objectMapper;
 
     @Test
-    void createThenListAndGetById() throws Exception {
-        var body =
-                new CreateAccountRequest("GB90BANK12345698765432", "GBP", "integration-customer", new BigDecimal("99.50"));
+    void createThenGetById() throws Exception {
+        var body = new CreateAccountRequest(
+                "integration-customer", "GB90BANK12345698765432", AccountType.CHECKING, "GBP", new BigDecimal("99.50"));
 
         MvcResult created =
                 mockMvc.perform(
@@ -38,7 +39,7 @@ class AccountFullStackIntegrationTest {
                                         .contentType(MediaType.APPLICATION_JSON)
                                         .content(objectMapper.writeValueAsString(body)))
                         .andExpect(status().isCreated())
-                        .andExpect(jsonPath("$.iban").value("GB90BANK12345698765432"))
+                        .andExpect(jsonPath("$.accountNumber").value("GB90BANK12345698765432"))
                         .andReturn();
 
         String id = objectMapper.readTree(created.getResponse().getContentAsString()).get("id").asText();
@@ -46,12 +47,12 @@ class AccountFullStackIntegrationTest {
         mockMvc.perform(get("/api/accounts/" + id))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.balance").value(99.5))
-                .andExpect(jsonPath("$.iban").value("GB90BANK12345698765432"));
+                .andExpect(jsonPath("$.accountNumber").value("GB90BANK12345698765432"));
     }
 
     @Test
-    void duplicateIbanReturns409() throws Exception {
-        var body = new CreateAccountRequest("GB91BANK99999999999999", "EUR", "c", BigDecimal.ZERO);
+    void duplicateAccountNumberReturns409() throws Exception {
+        var body = new CreateAccountRequest("c", "GB91BANK99999999999999", AccountType.SAVINGS, "EUR", BigDecimal.ZERO);
         mockMvc.perform(
                         post("/api/accounts")
                                 .contentType(MediaType.APPLICATION_JSON)
@@ -62,6 +63,6 @@ class AccountFullStackIntegrationTest {
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(objectMapper.writeValueAsString(body)))
                 .andExpect(status().isConflict())
-                .andExpect(result -> assertThat(result.getResponse().getContentAsString()).contains("IBAN"));
+                .andExpect(result -> assertThat(result.getResponse().getContentAsString()).contains("Account number"));
     }
 }

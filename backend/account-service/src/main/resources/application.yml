@@ -9,6 +9,15 @@ spring:
     driver-class-name: org.h2.Driver
     username: sa
     password:
+  flyway:
+    enabled: false
+  kafka:
+    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    consumer:
+      group-id: account-service
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
   jpa:
     hibernate:
       ddl-auto: update
@@ -16,6 +25,16 @@ spring:
     properties:
       hibernate:
         format_sql: true
+
+# OAuth2: set issuer in docker profile (Keycloak). Empty = permit all for local dev/tests.
+spring.security.oauth2.resourceserver.jwt.issuer-uri: ${KEYCLOAK_ISSUER_URI:}
+
+day2:
+  kafka:
+    consumer:
+      enabled: ${DAY2_KAFKA_CONSUMER_ENABLED:false}
+    topics:
+      transaction-completed: bank.transaction.completed
 
 management:
   endpoints:

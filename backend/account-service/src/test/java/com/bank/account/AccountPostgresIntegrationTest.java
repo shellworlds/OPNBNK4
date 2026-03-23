@@ -6,10 +6,11 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import com.bank.account.domain.AccountType;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import static org.hamcrest.Matchers.hasSize;
-
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -22,7 +23,13 @@ import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
-@SpringBootTest
+@SpringBootTest(
+        properties = {
+            "spring.autoconfigure.exclude=org.springframework.boot.autoconfigure.kafka.KafkaAutoConfiguration",
+            "day2.kafka.consumer.enabled=false",
+            "spring.flyway.enabled=true",
+            "spring.jpa.hibernate.ddl-auto=validate"
+        })
 @AutoConfigureMockMvc
 @Testcontainers
 class AccountPostgresIntegrationTest {
@@ -37,7 +44,6 @@ class AccountPostgresIntegrationTest {
         registry.add("spring.datasource.username", POSTGRES::getUsername);
         registry.add("spring.datasource.password", POSTGRES::getPassword);
         registry.add("spring.datasource.driver-class-name", () -> "org.postgresql.Driver");
-        registry.add("spring.jpa.hibernate.ddl-auto", () -> "create-drop");
         registry.add("spring.jpa.properties.hibernate.dialect", () -> "org.hibernate.dialect.PostgreSQLDialect");
     }
 
@@ -54,10 +60,11 @@ class AccountPostgresIntegrationTest {
         assertThat(accounts.isArray()).isTrue();
 
         for (JsonNode acc : accounts) {
-            var payload = objectMapper.createObjectNode();
-            payload.put("iban", acc.get("iban").asText());
-            payload.put("currency", acc.get("currency").asText());
+            ObjectNode payload = objectMapper.createObjectNode();
             payload.put("customerId", acc.get("customerId").asText());
+            payload.put("accountNumber", acc.get("iban").asText());
+            payload.put("accountType", "CHECKING");
+            payload.put("currency", acc.get("currency").asText());
             payload.put("initialBalance", acc.get("initialBalance").asDouble());
 
             mockMvc.perform(
@@ -65,11 +72,12 @@ class AccountPostgresIntegrationTest {
                                     .contentType(MediaType.APPLICATION_JSON)
                                     .content(objectMapper.writeValueAsString(payload)))
                     .andExpect(status().isCreated())
-                    .andExpect(jsonPath("$.iban").value(acc.get("iban").asText()));
+                    .andExpect(jsonPath("$.accountNumber").value(acc.get("iban").asText()));
         }
 
-        mockMvc.perform(get("/api/accounts"))
+        String customerId = accounts.get(0).get("customerId").asText();
+        mockMvc.perform(get("/api/accounts/customer/" + customerId))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(accounts.size())));
+                .andExpect(jsonPath("$", Matchers.hasSize(1)));
     }
 }

@@ -1,7 +1,8 @@
 package com.bank.account.web;
 
-import com.bank.account.service.BankAccountService;
+import com.bank.account.service.AccountService;
 import com.bank.account.web.dto.AccountResponse;
+import com.bank.account.web.dto.BalanceAdjustRequest;
 import com.bank.account.web.dto.CreateAccountRequest;
 import jakarta.validation.Valid;
 import java.util.List;
@@ -19,25 +20,30 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/accounts")
 public class AccountController {
 
-    private final BankAccountService accountService;
+    private final AccountService accountService;
 
-    public AccountController(BankAccountService accountService) {
+    public AccountController(AccountService accountService) {
         this.accountService = accountService;
-    }
-
-    @GetMapping
-    public List<AccountResponse> listAccounts() {
-        return accountService.listAll();
-    }
-
-    @GetMapping("/{id}")
-    public AccountResponse getAccount(@PathVariable UUID id) {
-        return accountService.getById(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public AccountResponse createAccount(@Valid @RequestBody CreateAccountRequest request) {
-        return accountService.create(request);
+        return accountService.createAccount(request);
+    }
+
+    @GetMapping("/{id}")
+    public AccountResponse getAccount(@PathVariable UUID id) {
+        return accountService.getAccount(id);
+    }
+
+    @GetMapping("/customer/{customerId}")
+    public List<AccountResponse> listForCustomer(@PathVariable String customerId) {
+        return accountService.listForCustomer(customerId);
+    }
+
+    @PostMapping("/{id}/balance")
+    public AccountResponse adjustBalance(@PathVariable UUID id, @Valid @RequestBody BalanceAdjustRequest request) {
+        return accountService.adjustBalance(id, request);
     }
 }
