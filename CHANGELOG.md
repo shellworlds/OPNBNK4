@@ -2,6 +2,26 @@
 
 All notable changes to **OPNBNK4** (Digital Banking Platform) are documented here.
 
+## [1.0.0] — 2026-03-23
+
+### Added
+
+- **UAT:** `docs/uat/uat-script.md`, `uat-results.md`, `sign-off-placeholder.md`.
+- **Transaction status `UNDER_REVIEW`** when fraud verdict is **REVIEW**; Flyway `V3__transaction_under_review_status.sql`; event `TRANSACTION_FRAUD_REVIEW`.
+- **PIS:** `OpenbankingDownstreamService` returns downstream completion **status** (`COMPLETED` or `UNDER_REVIEW`).
+- **E2E:** Playwright test for high-value EUR payment held for review.
+- **UI:** Loading spinner, `formatApiError` in `api.js`, mock login submit disabled state, `UNDER_REVIEW` styling in account transactions.
+- **Docs:** `docs/architecture/final-architecture.md`, `api-reference.md`; operations (deployment, monitoring, scaling, troubleshooting, pre-deploy, smoke-go-live); developer (onboarding, coding-standards, ci-cd); user (web, mobile, faq); compliance (gdpr, psd2, audit-log); `docs/performance/final-tuning.md`; DR drill section in `disaster-recovery.md`.
+- **Deliverables:** `deliverables/` bundle (README, k8s/terraform copies, UAT, performance, security, architecture, demo instructions).
+- **Reports:** `GO_LIVE.md`, `PROJECT_COMPLETION_REPORT.md`, `DAY5_COMPLETE.md`, `docs/submission/CLIENT_HANDOFF_DAY5.md`, `docs/github/DAY5_DEDICATED_ISSUES.md`.
+- **CI:** `.github/workflows/day5-verify.yml` (manual).
+- **Wiki:** Day-5-Delivery; Releases v1.0.0.
+
+### Changed
+
+- **Helm / sample K8s** image tags default to **v1.0.0**.
+- **`.gitignore`:** `deliverables/demo/*.mp4` (and `.mov`).
+
 ## [0.9.0-day4] — 2026-03-23
 
 ### Added

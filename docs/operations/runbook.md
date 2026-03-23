@@ -87,3 +87,9 @@ Apply manifests under `infrastructure/k8s/base/` or `helm upgrade` using `infras
 
 - `GET /api/user/export?customerId=` — account-service JSON export.  
 - `POST /api/user/delete-request?customerId=` — records erasure intent (soft delete pipeline TBD).
+
+## Fraud review (Day 5)
+
+- Completing a transaction when the fraud service returns **REVIEW** (e.g. EUR equivalent above the review threshold) sets status **`UNDER_REVIEW`** and emits `TRANSACTION_FRAUD_REVIEW`.  
+- **BLOCK** still returns HTTP **403**.  
+- UAT script: `docs/uat/uat-script.md`.

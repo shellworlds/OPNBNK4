@@ -2,5 +2,5 @@ apiVersion: v2
 name: opnbnk4
 description: Digital banking platform — gateway and services (skeleton)
 type: application
-version: 0.9.0
-appVersion: "0.9.0"
+version: 1.0.0
+appVersion: "1.0.0"

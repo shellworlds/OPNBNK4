@@ -30,6 +30,7 @@ The project is **linked to the repository**, so it appears under **[github.com/s
 | **Day 2 verify** (`day2-verify.yml`) | Manual **Run workflow** — Day 2 service set **plus** `*Postgres*IntegrationTest`; optional E2E |
 | **Day 3 verify** (`day3-verify.yml`) | Manual **Run workflow** — full current backend set **plus** `*Postgres*IntegrationTest`; optional E2E |
 | **Day 4 verify** (`day4-verify.yml`) | Manual **Run workflow** — same backend/npm gates; optional Compose + Playwright API; optional Trivy FS |
+| **Day 5 verify** (`day5-verify.yml`) | Same as Day 4 verify (manual full sweep for go-live) |
 | **Security scan** (`security-scan.yml`) | Manual — Trivy filesystem (SARIF) + gateway image scan |
 | **Deploy AKS (tag)** (`deploy-aks.yml`) | On **version tag** push — build/push all images to **GHCR**; Helm upgrade job gated (`if: false` until Azure secrets) |
 | **SonarCloud (optional)** (`sonar-quality.yml`) | Disabled stub — enable when `SONAR_TOKEN` is configured |

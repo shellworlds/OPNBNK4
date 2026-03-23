@@ -40,3 +40,7 @@ frontend/web-portal/build/
 
 # OS
 Thumbs.db
+
+# Large client demo assets (keep README only in git)
+deliverables/demo/*.mp4
+deliverables/demo/*.mov

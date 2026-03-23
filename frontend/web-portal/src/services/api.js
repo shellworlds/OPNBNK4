@@ -28,7 +28,25 @@ api.interceptors.response.use(
   }
 );
 
+export function formatApiError(error) {
+  const d = error.response?.data;
+  if (d && typeof d === 'object' && d.message) {
+    return String(d.message);
+  }
+  if (typeof d === 'string' && d.trim()) {
+    return d;
+  }
+  if (error.response?.status) {
+    return `Request failed (${error.response.status})`;
+  }
+  return error.message || 'Request failed';
+}
+
 export async function getJson(path) {
-  const { data } = await api.get(path);
-  return data;
+  try {
+    const { data } = await api.get(path);
+    return data;
+  } catch (error) {
+    throw new Error(formatApiError(error));
+  }
 }

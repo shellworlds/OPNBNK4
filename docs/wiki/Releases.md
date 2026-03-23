@@ -2,6 +2,24 @@
 
 ← [Home](Home)
 
+## v1.0.0 — Day 5 production milestone
+
+- **Tag / release:** [v1.0.0](https://github.com/shellworlds/OPNBNK4/releases/tag/v1.0.0) *(create on GitHub after merge if not present)*
+- **Changelog:** [CHANGELOG.md](https://github.com/shellworlds/OPNBNK4/blob/main/CHANGELOG.md) on `main`
+
+### Summary
+
+UAT documentation, fraud **UNDER_REVIEW** status and PIS status propagation, UI polish, expanded operations/developer/user/compliance docs, `deliverables/` bundle, `GO_LIVE.md`, `PROJECT_COMPLETION_REPORT.md`.
+
+- **Client submission:** [docs/submission/CLIENT_HANDOFF_DAY5.md](https://github.com/shellworlds/OPNBNK4/blob/main/docs/submission/CLIENT_HANDOFF_DAY5.md)
+- **Engineering notes:** [DAY5_COMPLETE.md](https://github.com/shellworlds/OPNBNK4/blob/main/DAY5_COMPLETE.md)
+
+### Related wiki pages
+
+- [Day 5 — Delivery](Day-5-Delivery)
+
+---
+
 ## v0.9.0 — Day 4 release candidate
 
 - **Tag / release:** [v0.9.0](https://github.com/shellworlds/OPNBNK4/releases/tag/v0.9.0) *(create on GitHub after merge if not present)*

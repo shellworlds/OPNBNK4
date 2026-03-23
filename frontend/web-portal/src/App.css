@@ -208,3 +208,36 @@ button.link-button {
   padding: 0.1rem 0.35rem;
   border-radius: 4px;
 }
+
+.loading-inline {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
+
+.loading-spinner {
+  width: 1.1rem;
+  height: 1.1rem;
+  border: 2px solid #334155;
+  border-top-color: #38bdf8;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.form button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.tx-review {
+  color: #fbbf24;
+  font-weight: 600;
+}

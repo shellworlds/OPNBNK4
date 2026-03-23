@@ -1,3 +1,5 @@
+# Pushes all service images to GHCR when a version tag is pushed (e.g. v1.0.0).
+# Enable the helm-upgrade job after Azure secrets and GitHub environment reviewers are configured.
 name: Deploy AKS (tag)
 
 on:

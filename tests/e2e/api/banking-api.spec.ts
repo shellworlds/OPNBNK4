@@ -133,4 +133,41 @@ test.describe("API E2E — gateway", () => {
     expect(body).toHaveProperty("customerId");
     expect(body).toHaveProperty("accounts");
   });
+
+  test("high-amount completion held UNDER_REVIEW (fraud rules)", async ({ request }) => {
+    const suffix = Date.now();
+    const customerId = `e2e-fraud-${suffix}`;
+    const iban = `GB82WEST${String(suffix).padStart(14, "0").slice(-14)}`;
+    const createAcc = await request.post("/api/accounts", {
+      headers: { ...channelHeaders, "Content-Type": "application/json" },
+      data: {
+        customerId,
+        accountNumber: iban,
+        accountType: "CHECKING",
+        currency: "EUR",
+        initialBalance: 50_000,
+      },
+    });
+    expect(createAcc.ok()).toBeTruthy();
+    const acc = await createAcc.json();
+    const accountId = acc.id as string;
+
+    const txCreate = await request.post("/api/transactions", {
+      headers: { ...channelHeaders, "Content-Type": "application/json" },
+      data: {
+        accountId,
+        amount: 6000,
+        type: "DEBIT",
+        currency: "EUR",
+        reference: `fraud-review-${suffix}`,
+        description: "UAT high-value domestic payment",
+      },
+    });
+    expect(txCreate.status()).toBe(201);
+    const tx = await txCreate.json();
+    const complete = await request.post(`/api/transactions/${tx.id}/complete`, { headers: channelHeaders });
+    expect(complete.ok()).toBeTruthy();
+    const done = await complete.json();
+    expect(done.status).toBe("UNDER_REVIEW");
+  });
 });

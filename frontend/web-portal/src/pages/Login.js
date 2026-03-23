@@ -6,6 +6,7 @@ export default function Login() {
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [kcError, setKcError] = useState(null);
+  const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
     if (!keycloak) {
@@ -35,6 +36,10 @@ export default function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (submitting) {
+      return;
+    }
+    setSubmitting(true);
     navigate('/dashboard', { state: { username: username || 'demo-user' } });
   };
 
@@ -54,7 +59,9 @@ export default function Login() {
             autoComplete="username"
           />
         </label>
-        <button type="submit">Continue</button>
+        <button type="submit" disabled={submitting}>
+          {submitting ? 'Continuing…' : 'Continue'}
+        </button>
       </form>
     </div>
   );

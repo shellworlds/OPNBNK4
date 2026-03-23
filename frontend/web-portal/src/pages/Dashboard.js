@@ -63,7 +63,12 @@ export default function Dashboard() {
 
       <section className="panel">
         <h2>Accounts</h2>
-        {loading && <p>Loading…</p>}
+        {loading && (
+          <div className="loading-inline" role="status" aria-live="polite">
+            <span className="loading-spinner" aria-hidden />
+            <span>Loading accounts…</span>
+          </div>
+        )}
         {error && (
           <p className="error">
             Could not load accounts: {error}. Ensure the gateway and account service are running (for example{' '}

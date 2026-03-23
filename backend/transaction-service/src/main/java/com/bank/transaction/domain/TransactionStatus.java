@@ -3,5 +3,7 @@ package com.bank.transaction.domain;
 public enum TransactionStatus {
     PENDING,
     COMPLETED,
-    FAILED
+    FAILED,
+    /** Fraud rules require manual review (e.g. amount above review threshold). */
+    UNDER_REVIEW
 }

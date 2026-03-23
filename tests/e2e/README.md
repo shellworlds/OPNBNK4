@@ -30,7 +30,7 @@ SKIP_WEB_E2E=1 npm test
 
 | Area | Coverage |
 |------|----------|
-| **api/** | Account create/read, transaction create/complete, open banking consent/AIS/PIS/revoke, channel validation 400, GDPR export stub |
+| **api/** | Account create/read, transaction create/complete, open banking consent/AIS/PIS/revoke, channel validation 400, GDPR export stub, high-value payment **UNDER_REVIEW** (fraud) |
 | **web/** | Minimal load of portal home (skipped if unreachable) |
 
 **Not automated here (manual / Day 5):** Keycloak user self-registration UI, FIDO2/WebAuthn ceremonies, full OAuth2 authorization-code flow for end users, Detox mobile.

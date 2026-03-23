@@ -2,10 +2,12 @@ package com.bank.transaction;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.bank.transaction.client.AccountValidationClient;
+import com.bank.transaction.client.FraudEvaluationClient;
 import com.bank.transaction.domain.Transaction;
 import com.bank.transaction.domain.TransactionEvent;
 import com.bank.transaction.domain.TransactionMovementType;
@@ -19,6 +21,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.math.BigDecimal;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.function.Consumer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -39,13 +42,28 @@ class TransactionServiceTest {
     private AccountValidationClient accountValidationClient;
 
     @Mock
-    private ObjectProvider<com.bank.transaction.client.FraudEvaluationClient> fraudClient;
+    private ObjectProvider<FraudEvaluationClient> fraudClient;
+
+    @Mock
+    private FraudEvaluationClient fraudEvaluationClient;
 
     private TransactionService service;
 
     @BeforeEach
     void setUp() {
         service = new TransactionService(transactions, events, accountValidationClient, new ObjectMapper(), fraudClient);
+        lenient()
+                .doAnswer(
+                        inv -> {
+                            Consumer<FraudEvaluationClient> c = inv.getArgument(0);
+                            c.accept(fraudEvaluationClient);
+                            return null;
+                        })
+                .when(fraudClient)
+                .ifAvailable(any());
+        lenient()
+                .when(fraudEvaluationClient.evaluateVerdict(any(), any(), any(), any()))
+                .thenReturn("ALLOW");
     }
 
     @Test
@@ -78,6 +96,31 @@ class TransactionServiceTest {
         ArgumentCaptor<TransactionEvent> cap = ArgumentCaptor.forClass(TransactionEvent.class);
         verify(events).save(cap.capture());
         assertThat(cap.getValue().getEventType()).isEqualTo(TransactionService.EVT_COMPLETED);
+    }
+
+    @Test
+    void completeTransactionHeldUnderReviewWhenFraudReturnsReview() {
+        UUID id = UUID.randomUUID();
+        UUID acc = UUID.randomUUID();
+        var tx = new Transaction(
+                acc,
+                new BigDecimal("6000"),
+                "EUR",
+                TransactionMovementType.DEBIT,
+                null,
+                "high",
+                TransactionStatus.PENDING);
+        setId(tx, id);
+        when(transactions.findById(id)).thenReturn(Optional.of(tx));
+        when(transactions.save(any(Transaction.class))).thenAnswer(inv -> inv.getArgument(0));
+        when(fraudEvaluationClient.evaluateVerdict(any(), any(), any(), any())).thenReturn("REVIEW");
+
+        var res = service.completeTransaction(id, "device-1");
+
+        assertThat(res.status()).isEqualTo(TransactionStatus.UNDER_REVIEW);
+        ArgumentCaptor<TransactionEvent> cap = ArgumentCaptor.forClass(TransactionEvent.class);
+        verify(events).save(cap.capture());
+        assertThat(cap.getValue().getEventType()).isEqualTo(TransactionService.EVT_FRAUD_REVIEW);
     }
 
     private static void setId(Transaction t, UUID id) {

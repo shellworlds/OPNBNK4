@@ -29,7 +29,7 @@ public class OpenbankingPisController {
             @Valid @RequestBody CreatePaymentRequest body,
             @RequestHeader(value = HttpHeaders.AUTHORIZATION, required = false) String authorization) {
         request.getAttribute("ob.customerId"); // validated by filter
-        UUID txId = downstream.initiatePayment(body, authorization);
-        return Map.of("transactionId", txId, "status", "COMPLETED");
+        var result = downstream.initiatePayment(body, authorization);
+        return Map.of("transactionId", result.transactionId(), "status", result.status());
     }
 }

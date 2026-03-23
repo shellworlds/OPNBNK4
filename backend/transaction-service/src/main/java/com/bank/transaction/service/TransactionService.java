@@ -15,7 +15,9 @@ import com.bank.transaction.web.dto.TransactionResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicReference;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -27,6 +29,7 @@ public class TransactionService {
 
     public static final String EVT_CREATED = "TRANSACTION_CREATED";
     public static final String EVT_COMPLETED = "TRANSACTION_COMPLETED";
+    public static final String EVT_FRAUD_REVIEW = "TRANSACTION_FRAUD_REVIEW";
 
     private final TransactionRepository transactionRepository;
     private final TransactionEventRepository eventRepository;
@@ -85,6 +88,7 @@ public class TransactionService {
         if (tx.getStatus() != TransactionStatus.PENDING) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Transaction is not pending");
         }
+        var verdictHolder = new AtomicReference<String>("ALLOW");
         fraudEvaluationClient.ifAvailable(
                 client -> {
                     String verdict =
@@ -93,11 +97,29 @@ public class TransactionService {
                                     tx.getAmount(),
                                     tx.getCurrency(),
                                     deviceFingerprint);
-                    if ("BLOCK".equalsIgnoreCase(verdict)) {
-                        throw new ResponseStatusException(
-                                HttpStatus.FORBIDDEN, "Transaction blocked by fraud policy");
-                    }
+                    verdictHolder.set(verdict);
                 });
+        String verdict = verdictHolder.get();
+        if ("BLOCK".equalsIgnoreCase(verdict)) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Transaction blocked by fraud policy");
+        }
+        if ("REVIEW".equalsIgnoreCase(verdict)) {
+            tx.setStatus(TransactionStatus.UNDER_REVIEW);
+            transactionRepository.save(tx);
+            eventRepository.save(
+                    new TransactionEvent(
+                            tx.getId(),
+                            EVT_FRAUD_REVIEW,
+                            writeJson(
+                                    Map.of(
+                                            "transactionId",
+                                            tx.getId().toString(),
+                                            "status",
+                                            "UNDER_REVIEW",
+                                            "message",
+                                            "Held for fraud review"))));
+            return TransactionResponse.from(tx);
+        }
         tx.setStatus(TransactionStatus.COMPLETED);
         transactionRepository.save(tx);
         var completed = new TransactionCompletedEvent(

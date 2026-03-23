@@ -31,6 +31,21 @@ This document describes **backup and restore** for the transactional store (Post
 3. Run Playwright API suite (`tests/e2e`, project `api`).  
 4. Document duration and anomalies in `docs/reports/`.
 
+## Day 5 — DR drill (simulated)
+
+**Objective:** Prove restore procedure and measure rough RTO on a non-production clone.
+
+| Step | Action | Record result |
+|------|--------|----------------|
+| 1 | `pg_dump` from Compose Postgres (or Azure backup export) | File size, duration |
+| 2 | Stop writers; restore dump to **empty** database or new volume | Success / errors |
+| 3 | `docker compose up` (or redeploy pods) and run Playwright API E2E | Pass/fail |
+| 4 | Spot-check account balances vs. pre-failure export | Match Y/N |
+
+**Recovery time observed (lab):** _minutes — fill after drill_  
+
+If restore fails, capture logs and open a severity-1 issue; do not declare go-live until resolved.
+
 ## Contacts
 
 - Platform owner: _fill_  

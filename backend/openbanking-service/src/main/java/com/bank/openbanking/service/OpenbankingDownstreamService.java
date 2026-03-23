@@ -72,7 +72,7 @@ public class OpenbankingDownstreamService {
         }
     }
 
-    public UUID initiatePayment(CreatePaymentRequest request, String authorizationHeader) {
+    public PaymentInitResult initiatePayment(CreatePaymentRequest request, String authorizationHeader) {
         require(transactionBaseUrl);
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("accountId", request.accountId());
@@ -94,15 +94,21 @@ public class OpenbankingDownstreamService {
                 .bodyToMono(JsonNode.class)
                 .block();
         UUID id = UUID.fromString(created.get("id").asText());
-        webClient
+        JsonNode completed = webClient
                 .post()
                 .uri(transactionBaseUrl + "/api/transactions/{id}/complete", id)
                 .headers(h -> forwardAuth(h, authorizationHeader))
                 .retrieve()
-                .toBodilessEntity()
+                .bodyToMono(JsonNode.class)
                 .block();
-        return id;
+        String status =
+                completed != null && completed.hasNonNull("status")
+                        ? completed.get("status").asText()
+                        : "COMPLETED";
+        return new PaymentInitResult(id, status);
     }
+
+    public record PaymentInitResult(UUID transactionId, String status) {}
 
     private static void forwardAuth(org.springframework.http.HttpHeaders h, String authorizationHeader) {
         if (authorizationHeader != null && !authorizationHeader.isBlank()) {

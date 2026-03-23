@@ -49,7 +49,12 @@ export default function AccountDetail() {
         </div>
       </header>
 
-      {loading && <p>Loading…</p>}
+      {loading && (
+        <div className="loading-inline" role="status" aria-live="polite">
+          <span className="loading-spinner" aria-hidden />
+          <span>Loading account…</span>
+        </div>
+      )}
       {error && <p className="error">{error}</p>}
 
       {!loading && !error && account && (
@@ -72,7 +77,11 @@ export default function AccountDetail() {
                 <span className="tx-amt">
                   {t.amount} {t.currency}
                 </span>
-                <span className="tx-meta">{t.status}</span>
+                <span
+                  className={'tx-meta' + (t.status === 'UNDER_REVIEW' ? ' tx-review' : '')}
+                  title={t.status === 'UNDER_REVIEW' ? 'Held for fraud review' : undefined}>
+                  {t.status}
+                </span>
                 <span className="tx-desc">{t.description || t.reference || '—'}</span>
               </li>
             ))}
