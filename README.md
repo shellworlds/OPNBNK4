@@ -24,6 +24,16 @@ Microservices-based digital banking with open banking (PSD2-style) and omni-chan
 
 See `docs/architecture/high-level-design.md` for C4-style diagrams and component boundaries.
 
+## GitHub: wiki, project, issues, actions, insights
+
+| Area | Link / location |
+|------|------------------|
+| **Wiki (source in repo)** | [`docs/wiki/Home.md`](docs/wiki/Home.md) — copy into the GitHub **Wiki** after you create the first page in the UI (remote wiki git is provisioned then). |
+| **Project (board)** | [OPNBNK4 Digital Banking Platform](https://github.com/users/shellworlds/projects/6) — Day 1 items **Done**, backlog **Todo**. |
+| **Issues** | [shellworlds/OPNBNK4/issues](https://github.com/shellworlds/OPNBNK4/issues) · milestone **Day 1** |
+| **Actions** | [Workflow runs](https://github.com/shellworlds/OPNBNK4/actions) — `CI` on push/PR; **Day 1 verify (manual)** for on-demand test reports |
+| **Insights** | [Pulse / contributors](https://github.com/shellworlds/OPNBNK4/pulse) — activity and graphs (GitHub-managed; enable Dependabot / dependency graph in **Settings** if required) |
+
 ## Local development
 
 ### Prerequisites
