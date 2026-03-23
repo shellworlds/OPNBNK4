@@ -1,0 +1,10 @@
+spring:
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.kafka.KafkaAutoConfiguration
+  flyway:
+    enabled: false
+
+day2.kafka.producer.enabled: false
+
+account.service.base-url: ""

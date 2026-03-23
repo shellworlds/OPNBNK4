@@ -7,7 +7,19 @@ spring:
     username: bank
     password: bank
     driver-class-name: org.postgresql.Driver
+  flyway:
+    enabled: true
   jpa:
+    hibernate:
+      ddl-auto: validate
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+
+spring.kafka.bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:kafka:29092}
+
+account.service.base-url: ${ACCOUNT_SERVICE_BASE_URL:http://account-service:8081}
+
+day2.kafka.producer.enabled: ${DAY2_KAFKA_PRODUCER_ENABLED:true}
+
+spring.security.oauth2.resourceserver.jwt.issuer-uri: ${KEYCLOAK_ISSUER_URI:}

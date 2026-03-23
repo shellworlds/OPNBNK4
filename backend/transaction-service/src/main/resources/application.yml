@@ -9,10 +9,31 @@ spring:
     driver-class-name: org.h2.Driver
     username: sa
     password:
+  flyway:
+    enabled: false
+  kafka:
+    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: false
+
+spring.security.oauth2.resourceserver.jwt.issuer-uri: ${KEYCLOAK_ISSUER_URI:}
+
+account.service.base-url: ${ACCOUNT_SERVICE_BASE_URL:}
+
+day2:
+  kafka:
+    producer:
+      enabled: ${DAY2_KAFKA_PRODUCER_ENABLED:false}
+    topics:
+      transaction-created: bank.transaction.created
+      transaction-completed: bank.transaction.completed
+  outbox:
+    publish-interval-ms: 2000
 
 management:
   endpoints:

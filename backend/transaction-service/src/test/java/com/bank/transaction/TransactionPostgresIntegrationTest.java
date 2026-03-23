@@ -1,14 +1,11 @@
 package com.bank.transaction;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.fasterxml.jackson.databind.JsonNode;
+import com.bank.transaction.web.dto.CreateTransactionRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import static org.hamcrest.Matchers.hasSize;
-
 import java.math.BigDecimal;
 import java.util.UUID;
 import org.junit.jupiter.api.Test;
@@ -19,11 +16,19 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
-@SpringBootTest
+@SpringBootTest(
+        properties = {
+            "spring.autoconfigure.exclude=org.springframework.boot.autoconfigure.kafka.KafkaAutoConfiguration",
+            "day2.kafka.producer.enabled=false",
+            "spring.flyway.enabled=true",
+            "spring.jpa.hibernate.ddl-auto=validate",
+            "account.service.base-url="
+        })
 @AutoConfigureMockMvc
 @Testcontainers
 class TransactionPostgresIntegrationTest {
@@ -36,12 +41,11 @@ class TransactionPostgresIntegrationTest {
                     .withPassword("bank");
 
     @DynamicPropertySource
-    static void registerDatasource(DynamicPropertyRegistry registry) {
+    static void ds(DynamicPropertyRegistry registry) {
         registry.add("spring.datasource.url", POSTGRES::getJdbcUrl);
         registry.add("spring.datasource.username", POSTGRES::getUsername);
         registry.add("spring.datasource.password", POSTGRES::getPassword);
         registry.add("spring.datasource.driver-class-name", () -> "org.postgresql.Driver");
-        registry.add("spring.jpa.hibernate.ddl-auto", () -> "create-drop");
         registry.add("spring.jpa.properties.hibernate.dialect", () -> "org.hibernate.dialect.PostgreSQLDialect");
     }
 
@@ -52,28 +56,24 @@ class TransactionPostgresIntegrationTest {
     private ObjectMapper objectMapper;
 
     @Test
-    void persistsOpenDataTransactionSamples() throws Exception {
-        JsonNode root = objectMapper.readTree(getClass().getResourceAsStream("/public-banking-samples.json"));
-        JsonNode samples = root.get("transactions");
-        UUID syntheticAccount = UUID.fromString("11111111-1111-1111-1111-111111111111");
+    void createAndComplete() throws Exception {
+        UUID acc = UUID.randomUUID();
+        var createReq = new CreateTransactionRequest(
+                acc, new BigDecimal("1.00"), com.bank.transaction.domain.TransactionMovementType.DEBIT, "GBP", "t", "ref");
 
-        for (JsonNode row : samples) {
-            var payload = objectMapper.createObjectNode();
-            payload.put("accountId", syntheticAccount.toString());
-            payload.put("amount", BigDecimal.valueOf(row.get("amount").asDouble()));
-            payload.put("currency", row.get("currency").asText());
-            payload.put("reference", row.get("reference").asText());
+        MvcResult created =
+                mockMvc.perform(
+                                post("/api/transactions")
+                                        .contentType(MediaType.APPLICATION_JSON)
+                                        .content(objectMapper.writeValueAsString(createReq)))
+                        .andExpect(status().isCreated())
+                        .andExpect(jsonPath("$.status").value("PENDING"))
+                        .andReturn();
 
-            mockMvc.perform(
-                            post("/api/transactions")
-                                    .contentType(MediaType.APPLICATION_JSON)
-                                    .content(objectMapper.writeValueAsString(payload)))
-                    .andExpect(status().isCreated())
-                    .andExpect(jsonPath("$.accountId").value(syntheticAccount.toString()));
-        }
+        String id = objectMapper.readTree(created.getResponse().getContentAsString()).get("id").asText();
 
-        mockMvc.perform(get("/api/transactions").param("accountId", syntheticAccount.toString()))
+        mockMvc.perform(post("/api/transactions/" + id + "/complete"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(samples.size())));
+                .andExpect(jsonPath("$.status").value("COMPLETED"));
     }
 }
