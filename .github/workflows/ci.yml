@@ -28,6 +28,8 @@ jobs:
 
       - name: Build and test
         working-directory: backend/${{ matrix.service }}
+        env:
+          TESTCONTAINERS_RYUK_DISABLED: "true"
         run: |
           chmod +x gradlew
           ./gradlew test bootJar --no-daemon
@@ -70,3 +72,21 @@ jobs:
           docker build -t dbp-openbanking:ci ./backend/openbanking-service
           docker build -t dbp-gateway:ci ./backend/api-gateway
           docker build -t dbp-web:ci ./frontend/web-portal
+
+  e2e-open-data-smoke:
+    runs-on: ubuntu-latest
+    needs: [docker-validate]
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Start stack
+        run: docker compose up -d --build
+
+      - name: Wait for gateway and run open-data smoke
+        run: |
+          python3 infrastructure/scripts/smoke-e2e.py --gateway http://localhost:8080
+
+      - name: Tear down
+        if: always()
+        run: docker compose down -v --remove-orphans

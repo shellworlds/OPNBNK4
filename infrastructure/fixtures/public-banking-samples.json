@@ -1,0 +1,50 @@
+{
+  "license_note": "IBAN strings below are widely published structural / check-digit examples used in ISO 13616 documentation and educational material. They are not real customer accounts and carry no funds.",
+  "references": [
+    "https://www.iso.org/standard/81090.html",
+    "https://en.wikipedia.org/wiki/International_Bank_Account_Number"
+  ],
+  "accounts": [
+    {
+      "iban": "GB82WEST12345698765432",
+      "currency": "GBP",
+      "customerId": "open-sample-uk-001",
+      "initialBalance": 1250.5,
+      "note": "Commonly cited UK-style IBAN example (format illustration)."
+    },
+    {
+      "iban": "DE89370400440532013000",
+      "currency": "EUR",
+      "customerId": "open-sample-de-001",
+      "initialBalance": 200,
+      "note": "Commonly cited DE IBAN example (format illustration)."
+    },
+    {
+      "iban": "FR1420041010050500013M02606",
+      "currency": "EUR",
+      "customerId": "open-sample-fr-001",
+      "initialBalance": 88.88,
+      "note": "Commonly cited FR IBAN example (format illustration)."
+    }
+  ],
+  "transactions": [
+    {
+      "amount": -12.34,
+      "currency": "GBP",
+      "reference": "Open-data smoke: retail POS (illustrative)"
+    },
+    {
+      "amount": 500,
+      "currency": "EUR",
+      "reference": "Open-data smoke: salary credit (illustrative)"
+    }
+  ],
+  "consents": [
+    {
+      "tppId": "tpp-aisp-demo",
+      "scopes": ["accounts:read", "transactions:read"],
+      "customerId": "open-sample-psd2-001",
+      "validUntil": null
+    }
+  ]
+}
