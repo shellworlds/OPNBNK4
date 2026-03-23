@@ -28,6 +28,7 @@ See `docs/architecture/high-level-design.md` for C4-style diagrams and component
 
 | Area | Link / location |
 |------|------------------|
+| **Releases** | [v0.1.0-day1 (Day 1)](https://github.com/shellworlds/OPNBNK4/releases/tag/v0.1.0-day1) · [`CHANGELOG.md`](CHANGELOG.md) |
 | **Wiki (source in repo)** | [`docs/wiki/Home.md`](docs/wiki/Home.md) — copy into the GitHub **Wiki** after you create the first page in the UI (remote wiki git is provisioned then). |
 | **Project (board)** | [OPNBNK4 Digital Banking Platform](https://github.com/users/shellworlds/projects/6) — Day 1 items **Done**, backlog **Todo**. |
 | **Issues** | [shellworlds/OPNBNK4/issues](https://github.com/shellworlds/OPNBNK4/issues) · milestone **Day 1** |
