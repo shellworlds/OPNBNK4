@@ -27,7 +27,7 @@ Welcome to the **[shellworlds/OPNBNK4](https://github.com/shellworlds/OPNBNK4)**
 | **Architecture** | [docs/architecture/](https://github.com/shellworlds/OPNBNK4/tree/main/docs/architecture) |
 | **Project board** | [Repository Projects](https://github.com/shellworlds/OPNBNK4/projects) · [OPNBNK4 Digital Banking Platform](https://github.com/users/shellworlds/projects/6) |
 | **Actions** | [Workflow runs](https://github.com/shellworlds/OPNBNK4/actions) |
-| **Releases (GitHub)** | [Releases](https://github.com/shellworlds/OPNBNK4/releases) |
+| **Releases (GitHub)** | [v0.2.0-day2 (Day 2)](https://github.com/shellworlds/OPNBNK4/releases/tag/v0.2.0-day2) · [All releases](https://github.com/shellworlds/OPNBNK4/releases) |
 
 ## Source mirror
 
