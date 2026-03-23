@@ -1,5 +1,7 @@
 # Day 1 — Delivery summary
 
+← [Home](Home)
+
 **Objective:** Environment setup, repository scaffolding, initial architecture, CI/CD foundation, and working vertical slice of core APIs.
 
 ## Delivered in repository

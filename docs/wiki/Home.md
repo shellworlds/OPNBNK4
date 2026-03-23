@@ -1,18 +1,28 @@
-# OPNBNK4 — Digital Banking Platform Wiki
+# OPNBNK4 — Digital Banking Platform
 
-> **Mirror:** This folder mirrors the GitHub Wiki. If the remote wiki is empty, copy these files via the repo **Wiki** tab (or enable Wiki in **Settings → General → Features** and push from a local `OPNBNK4.wiki` clone).
+Welcome to the **[shellworlds/OPNBNK4](https://github.com/shellworlds/OPNBNK4)** wiki. Use the **sidebar** for quick navigation.
 
-## Quick links
+## Pages
+
+| Page | Description |
+|------|-------------|
+| [Day 1 — Delivery](https://github.com/shellworlds/OPNBNK4/wiki/Day-1-Delivery) | What shipped in Day 1 and what is out of scope |
+| [GitHub: Project, Issues, Actions & Insights](https://github.com/shellworlds/OPNBNK4/wiki/GitHub-Project-Issues-Actions-Insights) | Board, milestones, CI workflows, Insights |
+| [Releases](https://github.com/shellworlds/OPNBNK4/wiki/Releases) | Tagged milestones and changelog |
+
+## Quick links (repository)
 
 | Resource | URL |
 |----------|-----|
-| **Repository** | [shellworlds/OPNBNK4](https://github.com/shellworlds/OPNBNK4) |
-| **Day 1 (detailed)** | [Day-1-Delivery.md](./Day-1-Delivery.md) |
-| **GitHub Project** | [OPNBNK4 Digital Banking Platform](https://github.com/users/shellworlds/projects/6) |
+| **README** | [main/README.md](https://github.com/shellworlds/OPNBNK4/blob/main/README.md) |
+| **CHANGELOG** | [CHANGELOG.md](https://github.com/shellworlds/OPNBNK4/blob/main/CHANGELOG.md) |
+| **Day 1 client test report** | [docs/day1-client-test-report.md](https://github.com/shellworlds/OPNBNK4/blob/main/docs/day1-client-test-report.md) |
+| **Verification log** | [docs/verification.md](https://github.com/shellworlds/OPNBNK4/blob/main/docs/verification.md) |
+| **Architecture** | [docs/architecture/](https://github.com/shellworlds/OPNBNK4/tree/main/docs/architecture) |
+| **Project board** | [OPNBNK4 Digital Banking Platform](https://github.com/users/shellworlds/projects/6) |
 | **Actions** | [Workflow runs](https://github.com/shellworlds/OPNBNK4/actions) |
-| **Insights** | [Pulse](https://github.com/shellworlds/OPNBNK4/pulse) |
-| **Issues** | [Issues](https://github.com/shellworlds/OPNBNK4/issues) |
+| **Releases (GitHub)** | [Releases](https://github.com/shellworlds/OPNBNK4/releases) |
 
-## Day 1 snapshot
+## Source mirror
 
-Monorepo with Spring Boot services, gateway, React portal, Docker Compose, CI, tests, and client test report (`docs/day1-client-test-report.md`).
+The same Markdown files live under **`docs/wiki/`** in the main repository so you can edit via PRs, then sync to this wiki (clone `OPNBNK4.wiki.git` and push).

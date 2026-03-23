@@ -1,5 +1,7 @@
 # GitHub: Project, Issues, Actions & Insights
 
+← [Home](Home)
+
 ## Project board
 
 **[OPNBNK4 Digital Banking Platform](https://github.com/users/shellworlds/projects/6)** (user-scoped Project v2)
@@ -25,6 +27,6 @@
 
 **[Pulse / Insights](https://github.com/shellworlds/OPNBNK4/pulse)** — populated by GitHub from activity, contributors, and (if enabled) traffic. Enable **Dependency graph** / **Dependabot** under **Settings → Code security** if the client requires it.
 
-## Wiki (GitHub)
+## Wiki (this site)
 
-If **Wiki** is enabled but empty: open **Wiki → Create first page**, or clone `https://github.com/shellworlds/OPNBNK4.wiki.git` after the first page exists, then sync content from `docs/wiki/` in this repository.
+Live wiki: **[github.com/shellworlds/OPNBNK4/wiki](https://github.com/shellworlds/OPNBNK4/wiki)**. Source Markdown is mirrored under **`docs/wiki/`** in the main repo; clone **`https://github.com/shellworlds/OPNBNK4.wiki.git`**, copy or merge from `docs/wiki/`, then **`git push`** to publish updates.
