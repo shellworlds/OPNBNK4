@@ -63,4 +63,12 @@ Clone https://github.com/shellworlds/OPNBNK4.wiki.git, merge from `docs/wiki/` i
 
 **For the client:** repository URL **https://github.com/shellworlds/OPNBNK4** and this file **docs/submission/CLIENT_HANDOFF_DAY2.md**.
 
+## GitHub wrap-up (completed)
+
+- **Release:** [v0.2.0-day2](https://github.com/shellworlds/OPNBNK4/releases/tag/v0.2.0-day2)
+- **Milestones:** Day 2, Day 3
+- **Issues:** [#4](https://github.com/shellworlds/OPNBNK4/issues/4) (Day 2 closure, closed); Day 3 backlog [#5](https://github.com/shellworlds/OPNBNK4/issues/5)–[#7](https://github.com/shellworlds/OPNBNK4/issues/7), [#10](https://github.com/shellworlds/OPNBNK4/issues/10)
+- **Wiki:** [Day-2-Delivery](https://github.com/shellworlds/OPNBNK4/wiki/Day-2-Delivery) synced from `docs/wiki/`
+- **Dependabot:** [`.github/dependabot.yml`](https://github.com/shellworlds/OPNBNK4/blob/main/.github/dependabot.yml) · [Insights doc](https://github.com/shellworlds/OPNBNK4/blob/main/docs/github/INSIGHTS_DEPENDABOT.md)
+
 Next steps: see DAY2_COMPLETE.md (Day 3 focus).

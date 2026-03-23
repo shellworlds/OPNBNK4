@@ -4,8 +4,8 @@
 
 ## v0.2.0-day2 — Day 2 milestone
 
-- **Tag:** create from `main` when ready — suggested name `v0.2.0-day2` ([create release](https://github.com/shellworlds/OPNBNK4/releases/new)).
-- **Changelog:** [CHANGELOG.md](https://github.com/shellworlds/OPNBNK4/blob/main/CHANGELOG.md) on `main`.
+- **Tag / release:** [v0.2.0-day2](https://github.com/shellworlds/OPNBNK4/releases/tag/v0.2.0-day2)
+- **Changelog:** [CHANGELOG.md](https://github.com/shellworlds/OPNBNK4/blob/main/CHANGELOG.md) on `main`
 
 ### Summary
 
