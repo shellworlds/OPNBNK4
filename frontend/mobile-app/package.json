@@ -1,0 +1,6 @@
+{
+  "name": "mobile-app",
+  "version": "0.0.1",
+  "private": true,
+  "description": "React Native stub — run `npx @react-native-community/cli init` or Expo when you start mobile work."
+}

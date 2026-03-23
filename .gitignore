@@ -1,0 +1,38 @@
+# Build
+**/build/
+**/target/
+*.class
+*.jar
+!**/gradle/wrapper/gradle-wrapper.jar
+*.war
+*.ear
+.gradle/
+
+# Node
+node_modules/
+**/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+frontend/web-portal/build/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+*.swp
+.DS_Store
+
+# Env / secrets
+.env
+.env.local
+*.pem
+!**/placeholder.pem
+
+# Terraform
+**/.terraform/
+*.tfstate
+*.tfstate.*
+
+# OS
+Thumbs.db

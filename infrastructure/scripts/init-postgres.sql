@@ -1,0 +1,4 @@
+-- Per-service databases for local Docker Compose (single Postgres instance).
+CREATE DATABASE accountdb OWNER bank;
+CREATE DATABASE transactiondb OWNER bank;
+CREATE DATABASE openbankingdb OWNER bank;
