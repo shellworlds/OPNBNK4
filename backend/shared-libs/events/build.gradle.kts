@@ -16,6 +16,6 @@ repositories {
 }
 
 dependencies {
-    api("com.fasterxml.jackson.core:jackson-annotations:2.17.2")
-    api("com.fasterxml.jackson.core:jackson-databind:2.17.2")
+    api("com.fasterxml.jackson.core:jackson-annotations:2.21")
+    api("com.fasterxml.jackson.core:jackson-databind:2.21")
 }
